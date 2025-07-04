@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
+import NavBar from './components/NavBar';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import About from './pages/About';
+import Services from './pages/Services';
+import Initiatives from './pages/Initiatives';
+import Capabilities from './pages/Capabilities';
+import News from './pages/News';
+import Career from './pages/Career';
+import Partner from './pages/Partner';
+import Contact from './pages/Contact';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider>
+      <Router>
+        <NavBar />
+        <div className="flex flex-col min-h-screen">
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/initiatives" element={<Initiatives />} />
+              <Route path="/capabilities" element={<Capabilities />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/career" element={<Career />} />
+              <Route path="/partner" element={<Partner />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 
