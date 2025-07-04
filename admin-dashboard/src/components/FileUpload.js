@@ -32,7 +32,7 @@ const FileUpload = ({ onUpload, currentUrl, accept = '*/*' }) => {
       const timestamp = new Date().getTime();
       const fileExt = file.name.split('.').pop();
       const fileName = `${timestamp}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-      const bucket = accept === 'image/*' ? 'aiimages' : 'aifiles';
+      const bucket = accept === 'image/*' ? 'etimages' : 'etfiles';
 
       // Upload the file
       const { error: uploadError, data } = await supabase.storage
