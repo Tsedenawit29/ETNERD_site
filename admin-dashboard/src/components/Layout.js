@@ -80,6 +80,7 @@ const Layout = ({ children }) => {
     { path: '/events', label: 'Events', icon: EventsIcon },
     { path: '/news', label: 'News', icon: NewsIcon },
     { path: '/contact-messages', label: 'Contact Messages', icon: MessagesIcon },
+    { path: '/booked-services', label: 'Booked Services', icon: MessagesIcon },
   ];
 
   const handleSignOut = async () => {

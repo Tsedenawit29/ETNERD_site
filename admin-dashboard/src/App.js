@@ -9,6 +9,7 @@ import Services from './pages/crud/Services';
 import Events from './pages/crud/Events';
 import News from './pages/crud/News';
 import ContactMessages from './pages/crud/ContactMessages';
+import BookedServices from './pages/crud/BookedServices';
 import PrivateRoute from './components/PrivateRoute';
 import Layout from './components/Layout';
 
@@ -27,6 +28,7 @@ function App() {
               <Route path="events" element={<Events />} />
               <Route path="news" element={<News />} />
               <Route path="contact-messages" element={<ContactMessages />} />
+              <Route path="booked-services" element={<BookedServices />} />
             </Route>
           </Routes>
         </ThemeProvider>

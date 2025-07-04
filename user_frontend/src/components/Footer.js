@@ -15,7 +15,7 @@ const navItems = [
 ];
 
 const Footer = () => (
-  <footer className="w-full bg-dashboard-primary text-white shadow-soft pt-8 pb-4 mt-16">
+  <footer className="w-full bg-dashboard-primary text-white shadow-soft pt-8 pb-4">
     <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between px-4 gap-8">
       <div className="flex-1 flex flex-col items-center md:items-start mb-6 md:mb-0">
         <span className="font-display text-2xl font-bold mb-1">ETNERD Security Solutions</span>

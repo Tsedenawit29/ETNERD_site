@@ -19,7 +19,7 @@ const Home = () => {
 
   return (
     <>
-      <section className="relative w-full min-h-[100vh] max-h-[100vh] flex items-center justify-center overflow-hidden z-0">
+      <section className="relative w-full min-h-[100vh] max-h-[100vh] flex items-center justify-center overflow-hidden z-0 bg-white dark:bg-black">
         <video
           className="absolute inset-0 w-full h-full object-cover z-0"
           src={homeVideo}
@@ -54,21 +54,30 @@ const Home = () => {
       </section>
 
       {/* Our Services Section */}
-      <section className="w-full bg-white dark:bg-dashboard-primary py-16 px-4 md:px-8">
+      <section className="w-full bg-white dark:bg-black py-16 px-4 md:px-8">
         <h2 className="font-display text-3xl md:text-4xl font-bold text-dashboard-accent dark:text-dashboard-accent-dark mb-8 text-center">Our Services</h2>
         {loading ? (
-          <div className="text-center text-dashboard-primary dark:text-white">Loading services...</div>
+          <div className="text-center text-dashboard-primary dark:text-dashboard-primary-bright">Loading services...</div>
         ) : services.length === 0 ? (
-          <div className="text-center text-dashboard-primary dark:text-white">No services found.</div>
+          <div className="text-center text-dashboard-primary dark:text-dashboard-primary-bright">No services found.</div>
         ) : (
           <div className="flex gap-6 overflow-x-auto pb-4 snap-x">
             {services.map(service => (
-              <div key={service.id} className="min-w-[300px] max-w-xs bg-white dark:bg-dashboard-primary-bright rounded-xl shadow-soft p-6 flex flex-col items-center snap-center">
-                {service.image_url && (
-                  <img src={service.image_url} alt={service.title} className="w-32 h-32 object-cover rounded-lg mb-4 shadow" />
-                )}
-                <h3 className="font-bold text-xl text-dashboard-accent dark:text-dashboard-accent-dark mb-2 text-center">{service.title}</h3>
-                <p className="text-dashboard-primary dark:text-white text-center text-sm mb-2">{service.description || service.content}</p>
+              <div key={service.id} className="min-w-[300px] max-w-xs relative rounded-xl shadow-soft flex flex-col items-center snap-center overflow-hidden group bg-white/80 dark:bg-dashboard-primary/80 p-6">
+                <div className="flex items-center w-full mb-3">
+                  {service.image_url && (
+                    <img src={service.image_url} alt={service.title} className="w-16 h-16 object-cover rounded-full border-4  shadow mr-4" />
+                  )}
+                  <h3 className="font-bold text-lg text-dashboard-accent dark:text-dashboard-accent-dark text-left flex-1">{service.title}</h3>
+                </div>
+                <div className="w-full">
+                  <p className="text-dashboard-primary dark:text-dashboard-primary-bright text-sm mb-2">
+                    {truncateSentence(service.description || service.content)}
+                  </p>
+                  <div className="flex justify-end">
+                    <Link to={`/services/${service.id}`} className="text-dashboard-accent dark:text-dashboard-accent-dark font-semibold hover:underline">View Details</Link>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -77,5 +86,12 @@ const Home = () => {
     </>
   );
 };
+
+// Helper function to truncate to one sentence
+function truncateSentence(text) {
+  if (!text) return '';
+  const match = text.match(/.*?[.!?](\s|$)/);
+  return match ? match[0] : text;
+}
 
 export default Home; 
