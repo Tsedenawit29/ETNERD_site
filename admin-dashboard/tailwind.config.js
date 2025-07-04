@@ -50,7 +50,18 @@ module.exports = {
         'text-secondary': {
           light: '#374151',
           dark: '#E5E7EB',
-        }
+        },
+        'dashboard-primary': {
+          DEFAULT: '#133041',
+          light: '#1a4660',
+          lighter: '#3a5a72',
+          bright: '#eaf6ff',
+        },
+        'dashboard-accent': {
+          DEFAULT: '#e2631c',
+          dark: '#ff944d',
+          light: '#fff4ed',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

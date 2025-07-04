@@ -3,7 +3,6 @@ import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 import { useAuth } from '../context/AuthContext';
 import logo from '../assets/hero.jpg';
-import supabase from '../config/supabase';
 
 // Icon components
 const HomeIcon = ({ className }) => (
@@ -60,7 +59,7 @@ const Avatar = ({ email, size = 32 }) => {
   
   return (
     <div 
-      className="flex items-center justify-center rounded-full bg-sai-teal-500 text-white font-medium shadow-sm"
+      className="flex items-center justify-center rounded-full bg-dashboard-primary text-white font-medium shadow-sm"
       style={{ width: size, height: size }}
     >
       {initials}
@@ -68,17 +67,11 @@ const Avatar = ({ email, size = 32 }) => {
   );
 };
 
-const Layout = ({ children, onChangePasswordClick }) => {
+const Layout = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [showChangePassword, setShowChangePassword] = useState(false);
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [changeError, setChangeError] = useState('');
-  const [changeSuccess, setChangeSuccess] = useState('');
-  const [changing, setChanging] = useState(false);
 
   const menuItems = [
     { path: '/dashboard', label: 'Dashboard', icon: HomeIcon },
@@ -106,34 +99,8 @@ const Layout = ({ children, onChangePasswordClick }) => {
     setSidebarOpen(false);
   };
 
-  const handleChangePassword = async (e) => {
-    e.preventDefault();
-    setChangeError('');
-    setChangeSuccess('');
-    if (newPassword !== confirmPassword) {
-      setChangeError('New passwords do not match.');
-      return;
-    }
-    setChanging(true);
-    try {
-      const { error } = await supabase.auth.updateUser({ password: newPassword });
-      if (error) {
-        setChangeError(error.message || 'Failed to change password.');
-      } else {
-        setChangeSuccess('Password changed successfully!');
-        setNewPassword('');
-        setConfirmPassword('');
-        setTimeout(() => setShowChangePassword(false), 1500);
-      }
-    } catch (err) {
-      setChangeError('An unexpected error occurred.');
-    } finally {
-      setChanging(false);
-    }
-  };
-
   return (
-    <div className="flex h-screen bg-white dark:bg-black">
+    <div className="flex h-screen bg-dashboard-primary dark:bg-dashboard-primary DEFAULT">
       {/* Mobile menu overlay */}
       {sidebarOpen && (
         <div 
@@ -152,8 +119,13 @@ const Layout = ({ children, onChangePasswordClick }) => {
         <div className="p-4 border-b border-gray-200 dark:border-gray-800">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <img src={logo} alt="SAI² Logo" className="h-8 w-auto mr-3 rounded-md" />
-              <h1 className="text-xl font-bold text-sai-teal-500 dark:text-sai-teal-200">AI Initiative</h1>
+              <div className="flex flex-col">
+                <div className="flex items-center">
+                  <img src={logo} alt="SAI² Logo" className="h-8 w-auto mr-3 rounded-md" />
+                  <h1 className="text-xl font-bold text-dashboard-primary dark:text-dashboard-primary-bright">ETNERD</h1>
+                </div>
+                <p className="text-xs italic text-dashboard-primary/60 dark:text-dashboard-primary-bright/70 mt-1 text-left">Local Brains. Global Standards</p>
+              </div>
             </div>
             {/* Close button for mobile */}
             <button
@@ -175,8 +147,8 @@ const Layout = ({ children, onChangePasswordClick }) => {
                 onClick={closeSidebar}
                 className={`flex items-center px-4 py-3 text-sm transition-colors duration-200 rounded-xl ${
                   location.pathname === item.path
-                    ? 'bg-sai-teal-500 text-white'
-                    : 'text-gray-600 dark:text-sai-teal-200 hover:bg-sai-teal-100 dark:hover:bg-gray-900 hover:text-sai-teal-500 dark:hover:text-sai-teal-200'
+                    ? 'bg-dashboard-accent text-white'
+                    : 'text-dashboard-primary dark:text-dashboard-primary-bright hover:bg-dashboard-accent/10 dark:hover:bg-dashboard-primary hover:text-dashboard-accent dark:hover:text-dashboard-accent-dark'
                 }`}
               >
                 <IconComponent className="mr-3 h-5 w-5 flex-shrink-0" />
@@ -184,12 +156,6 @@ const Layout = ({ children, onChangePasswordClick }) => {
               </Link>
             );
           })}
-          <button
-            className="w-full text-left px-4 py-2 mt-6 text-sai-teal-600 dark:text-sai-teal-200 hover:bg-sai-teal-50 dark:hover:bg-sai-teal-800 rounded-md font-semibold transition-colors duration-200"
-            onClick={() => setShowChangePassword(true)}
-          >
-            Change Password
-          </button>
         </nav>
 
         {/* Footer with user info and sign out */}
@@ -198,7 +164,7 @@ const Layout = ({ children, onChangePasswordClick }) => {
             <div className="flex items-center space-x-3">
               <Avatar email={user?.email} />
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-gray-900 dark:text-sai-teal-200 truncate">
+                <div className="text-sm font-medium text-dashboard-primary dark:text-dashboard-primary-bright truncate">
                   {user?.email}
                 </div>
               </div>
@@ -228,7 +194,7 @@ const Layout = ({ children, onChangePasswordClick }) => {
             </button>
             <div className="flex items-center">
               <img src={logo} alt="SAI² Logo" className="h-6 w-auto mr-2 rounded-md" />
-              <h1 className="text-lg font-bold text-sai-teal-500 dark:text-sai-teal-200">AI Initiative</h1>
+              <h1 className="text-lg font-bold text-dashboard-primary dark:text-dashboard-primary-bright">AI Initiative</h1>
             </div>
             <div className="w-10"></div> {/* Spacer for centering */}
           </div>
@@ -246,56 +212,6 @@ const Layout = ({ children, onChangePasswordClick }) => {
       <div className="fixed bottom-4 right-4 z-30">
         <ThemeToggle />
       </div>
-
-      {/* Change Password Modal */}
-      {showChangePassword && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/40">
-          <div className="bg-white dark:bg-gray-900 rounded-xl p-6 w-full max-w-sm shadow-xl border-4 border-sai-teal-500 dark:border-sai-teal-400 ring-2 ring-sai-teal-200 dark:ring-sai-teal-700">
-            <h2 className="text-xl font-bold mb-4 text-sai-teal-600 dark:text-sai-teal-200 text-center">Change Password</h2>
-            <form onSubmit={handleChangePassword} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">New Password</label>
-                <input
-                  type="password"
-                  className="w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                  value={newPassword}
-                  onChange={e => setNewPassword(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Confirm New Password</label>
-                <input
-                  type="password"
-                  className="w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                  value={confirmPassword}
-                  onChange={e => setConfirmPassword(e.target.value)}
-                  required
-                />
-              </div>
-              {changeError && <div className="text-red-500 text-sm text-center">{changeError}</div>}
-              {changeSuccess && <div className="text-green-600 text-sm text-center">{changeSuccess}</div>}
-              <div className="flex gap-2 mt-2">
-                <button
-                  type="button"
-                  className="flex-1 py-2 rounded-md bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700"
-                  onClick={() => setShowChangePassword(false)}
-                  disabled={changing}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="flex-1 py-2 rounded-md bg-sai-teal-500 text-white font-semibold hover:bg-sai-teal-600"
-                  disabled={changing}
-                >
-                  {changing ? 'Changing...' : 'Change Password'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

@@ -106,7 +106,7 @@ const FileUpload = ({ onUpload, currentUrl, accept = '*/*' }) => {
             <button
               type="button"
               onClick={() => setShowUrlInput(true)}
-              className="px-2 lg:px-3 py-1 text-xs lg:text-sm text-sai-teal-500 hover:bg-sai-teal-50 dark:hover:bg-sai-teal-900/20 rounded-md"
+              className="px-2 lg:px-3 py-1 text-xs lg:text-sm text-dashboard-accent hover:bg-dashboard-accent-dark rounded-md"
             >
               Change URL
             </button>
@@ -116,7 +116,7 @@ const FileUpload = ({ onUpload, currentUrl, accept = '*/*' }) => {
         <div className="space-y-3 lg:space-y-4">
           <div
             className={`border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4 lg:p-6 text-center transition-colors ${
-              !showUrlInput ? 'cursor-pointer hover:border-sai-teal-300 dark:hover:border-sai-teal-400' : ''
+              !showUrlInput ? 'cursor-pointer hover:border-dashboard-accent dark:hover:border-dashboard-accent' : ''
             }`}
             onClick={() => !showUrlInput && fileInputRef.current?.click()}
           >
@@ -135,13 +135,13 @@ const FileUpload = ({ onUpload, currentUrl, accept = '*/*' }) => {
                     value={urlInput}
                     onChange={(e) => setUrlInput(e.target.value)}
                     placeholder="Enter URL"
-                    className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-sai-teal-500 focus:border-sai-teal-500 bg-white dark:bg-gray-900 text-gray-900 dark:text-white text-sm"
+                    className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-dashboard-accent focus:border-dashboard-accent bg-white dark:bg-gray-900 text-gray-900 dark:text-white text-sm"
                     onClick={(e) => e.stopPropagation()}
                   />
                   <button
                     type="button"
                     onClick={handleUrlSubmit}
-                    className="px-3 lg:px-4 py-2 bg-sai-teal-200 text-white rounded-md hover:bg-sai-teal-300 transition-colors duration-200 text-sm"
+                    className="px-3 lg:px-4 py-2 bg-dashboard-accent text-white rounded-md hover:bg-dashboard-accent-dark transition-colors duration-200 text-sm"
                   >
                     Add URL
                   </button>
@@ -161,7 +161,7 @@ const FileUpload = ({ onUpload, currentUrl, accept = '*/*' }) => {
               <div className="space-y-2">
                 {isUploading ? (
                   <div className="flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-6 w-6 lg:h-8 lg:w-8 border-b-2 border-sai-teal-500"></div>
+                    <div className="animate-spin rounded-full h-6 w-6 lg:h-8 lg:w-8 border-b-2 border-dashboard-accent"></div>
                   </div>
                 ) : (
                   <>
@@ -180,7 +180,7 @@ const FileUpload = ({ onUpload, currentUrl, accept = '*/*' }) => {
                       />
                     </svg>
                     <div className="text-xs lg:text-sm text-gray-600 dark:text-gray-400">
-                      <span className="font-medium text-sai-teal-500 hover:text-sai-teal-600">
+                      <span className="font-medium text-dashboard-accent hover:text-dashboard-accent-dark">
                         Click to upload
                       </span>{' '}
                       or drag and drop
@@ -196,7 +196,7 @@ const FileUpload = ({ onUpload, currentUrl, accept = '*/*' }) => {
                         e.stopPropagation();
                         setShowUrlInput(true);
                       }}
-                      className="mt-2 text-xs lg:text-sm text-sai-teal-500 hover:text-sai-teal-600 dark:text-sai-teal-400 dark:hover:text-sai-teal-300"
+                      className="mt-2 text-xs lg:text-sm text-dashboard-accent hover:text-dashboard-accent-dark dark:text-dashboard-accent-dark dark:hover:text-dashboard-accent-light"
                     >
                       Or add a URL instead
                     </button>
