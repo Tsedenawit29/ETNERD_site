@@ -164,12 +164,11 @@ const Home = () => {
               </svg>
               <span className="text-sm font-semibold text-dashboard-primary dark:text-dashboard-primary">Security</span>
             </div>
-            {/* Innovation Icon (Rocket) */}
+            {/* Innovation Icon (Lightbulb) */}
             <div className="flex flex-col items-center">
               <svg className="w-20 h-20 text-dashboard-accent mb-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path d="M4 20l5-5m0 0l5.5-5.5a2.121 2.121 0 0 1 3 3L12 18m-3-3l3 3m0 0l5-5" stroke="#ff9800" strokeWidth="2" />
-                <path d="M15 9l2-2a2.828 2.828 0 1 0-4-4l-2 2" stroke="#133041" strokeWidth="2" />
-                <circle cx="7.5" cy="16.5" r="1.5" fill="#ff9800" />
+                <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" stroke="#ff9800" strokeWidth="2" fill="none" />
+                <circle cx="12" cy="12" r="3" fill="#ff9800" fillOpacity="0.3" />
               </svg>
               <span className="text-sm font-semibold text-dashboard-accent dark:text-dashboard-accent-dark">Innovation</span>
             </div>
@@ -180,7 +179,7 @@ const Home = () => {
                 <ellipse cx="12" cy="12" rx="8" ry="4" stroke="#ff9800" strokeWidth="2" fill="none" />
                 <path d="M12 2a10 10 0 0 1 0 20M2 12a10 10 0 0 1 20 0" stroke="#ff9800" strokeWidth="2" fill="none" />
               </svg>
-              <span className="text-sm font-semibold text-dashboard-primary dark:text-dashboard-primary">Global</span>
+              <span className="text-sm font-semibold text-dashboard-primary dark:text-dashboard-primary">Global Impact</span>
             </div>
           </div>
         </div>

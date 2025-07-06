@@ -51,8 +51,8 @@ const Contact = () => {
           <div className="space-y-10">
             {/* Contact Details */}
             <div className="bg-white dark:bg-dashboard-primary-bg p-10 rounded-3xl shadow-2xl border border-dashboard-accent/10">
-              <h3 className="font-display text-3xl font-bold text-dashboard-accent dark:text-dashboard-accent-dark mb-8 tracking-tight">Contact Details</h3>
-              <div className="space-y-6 text-xl">
+              <h3 className="font-display text-2xl md:text-3xl font-bold text-dashboard-accent dark:text-dashboard-accent-dark mb-8 tracking-tight">Contact Details</h3>
+              <div className="space-y-6 text-lg md:text-xl">
                 <div className="flex items-center gap-4">
                   <FaMapMarkerAlt className="text-dashboard-accent text-4xl drop-shadow" />
                   <div>
@@ -87,7 +87,7 @@ const Contact = () => {
             </div>
             {/* Map Integration */}
             <div className="bg-white dark:bg-dashboard-primary-bg p-6 rounded-3xl shadow-xl border-2 border-dashboard-primary/20 dark:border-dashboard-primary/40">
-              <h3 className="font-display text-2xl font-bold text-dashboard-accent dark:text-dashboard-accent-dark mb-6">Find Us on the Map</h3>
+              <h3 className="font-display text-2xl md:text-3xl font-bold text-dashboard-accent dark:text-dashboard-accent-dark mb-6">Find Us on the Map</h3>
               <div className="aspect-w-16 aspect-h-9 w-full rounded-2xl overflow-hidden border-2 border-dashboard-primary/20 dark:border-dashboard-primary/40 shadow-xl">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.613348616198!2d38.7909068!3d9.0118314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85c88b7b25e1%3A0xc07a82b9a7f3d64a!2sBole%2C%20Addis%20Ababa%2C%20Ethiopia!5e0!3m2!1sen!2set!4v1700000000000!5m2!1sen!2set"
@@ -104,7 +104,7 @@ const Contact = () => {
           </div>
           {/* Contact Form Column */}
           <div className="bg-white dark:bg-dashboard-primary-bg p-10 rounded-3xl shadow-2xl border border-dashboard-accent/10">
-            <h3 className="font-display text-3xl font-bold text-dashboard-accent dark:text-dashboard-accent-dark mb-8 tracking-tight">Send Us a Message</h3>
+            <h3 className="font-display text-2xl md:text-3xl font-bold text-dashboard-accent dark:text-dashboard-accent-dark mb-8 tracking-tight">Send Us a Message</h3>
             <form className="space-y-7" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-lg font-semibold mb-2 text-dashboard-primary dark:text-white font-display">Your Name</label>

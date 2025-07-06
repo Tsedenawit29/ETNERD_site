@@ -153,7 +153,7 @@ const Career = () => {
             {/* Card 1 */}
             <div className="bg-white dark:bg-slate-900 rounded-xl shadow p-8 flex flex-col items-center text-center border border-gray-100 dark:border-slate-800">
               <div className="bg-slate-200 dark:bg-slate-700 rounded-full h-14 w-14 flex items-center justify-center mb-4">
-                <svg xmlns='http://www.w3.org/2000/svg' className='h-7 w-7 text-dashboard-primary' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2'/><circle cx='12' cy='7' r='4'/></svg>
+                <svg xmlns='http://www.w3.org/2000/svg' className='h-7 w-7 text-dashboard-primary dark:text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2'/><circle cx='12' cy='7' r='4'/></svg>
               </div>
               <h3 className="text-xl font-bold text-dashboard-primary mb-2">Our Work Culture</h3>
               <p className="text-dashboard-primary dark:text-white">We foster an environment of innovation, collaboration, and continuous learning.</p>
@@ -161,7 +161,7 @@ const Career = () => {
             {/* Card 2 */}
             <div className="bg-white dark:bg-slate-900 rounded-xl shadow p-8 flex flex-col items-center text-center border border-gray-100 dark:border-slate-800">
               <div className="bg-slate-200 dark:bg-slate-700 rounded-full h-14 w-14 flex items-center justify-center mb-4">
-                <svg xmlns='http://www.w3.org/2000/svg' className='h-7 w-7 text-dashboard-primary' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M16 3.13a4 4 0 010 7.75M8 3.13a4 4 0 000 7.75'/></svg>
+                <svg xmlns='http://www.w3.org/2000/svg' className='h-7 w-7 text-dashboard-primary dark:text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M16 3.13a4 4 0 010 7.75M8 3.13a4 4 0 000 7.75'/></svg>
               </div>
               <h3 className="text-xl font-bold text-dashboard-primary mb-2">Our Team</h3>
               <p className="text-dashboard-primary dark:text-white">Join a diverse team of talented professionals passionate about technology and innovation.</p>
@@ -169,7 +169,7 @@ const Career = () => {
             {/* Card 3 */}
             <div className="bg-white dark:bg-slate-900 rounded-xl shadow p-8 flex flex-col items-center text-center border border-gray-100 dark:border-slate-800">
               <div className="bg-slate-200 dark:bg-slate-700 rounded-full h-14 w-14 flex items-center justify-center mb-8">
-                <svg xmlns='http://www.w3.org/2000/svg' className='h-7 w-7 text-dashboard-primary' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M3 7v4a1 1 0 001 1h3m10-5v4a1 1 0 01-1 1h-3m-4 4h6m2 0a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v6a2 2 0 002 2z'/></svg>
+                <svg xmlns='http://www.w3.org/2000/svg' className='h-7 w-7 text-dashboard-primary dark:text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M3 7v4a1 1 0 001 1h3m10-5v4a1 1 0 01-1 1h-3m-4 4h6m2 0a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v6a2 2 0 002 2z'/></svg>
               </div>
               <h3 className="text-xl font-bold text-dashboard-primary mb-2">About ETNERD</h3>
               <p className="text-dashboard-primary dark:text-white">Learn more about our mission, vision, and the innovative solutions we provide.</p>
@@ -223,7 +223,7 @@ const Career = () => {
             {/* Card 1 */}
             <div className="bg-white dark:bg-slate-900 rounded-xl shadow p-8 flex flex-col items-center text-center border border-gray-100 dark:border-slate-800">
               <div className="bg-slate-200 dark:bg-slate-700 rounded-full h-14 w-14 flex items-center justify-center mb-4">
-                <svg xmlns='http://www.w3.org/2000/svg' className='h-7 w-7 text-dashboard-primary' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2'/><circle cx='12' cy='7' r='4'/></svg>
+                <svg xmlns='http://www.w3.org/2000/svg' className='h-7 w-7 text-dashboard-primary dark:text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2'/><circle cx='12' cy='7' r='4'/></svg>
               </div>
               <h3 className="text-xl font-bold text-dashboard-primary mb-2">Our Work Culture</h3>
               <p className="text-dashboard-primary dark:text-white">We foster an environment of innovation, collaboration, and continuous learning.</p>
@@ -231,7 +231,7 @@ const Career = () => {
             {/* Card 2 */}
             <div className="bg-white dark:bg-slate-900 rounded-xl shadow p-8 flex flex-col items-center text-center border border-gray-100 dark:border-slate-800">
               <div className="bg-slate-200 dark:bg-slate-700 rounded-full h-14 w-14 flex items-center justify-center mb-4">
-                <svg xmlns='http://www.w3.org/2000/svg' className='h-7 w-7 text-dashboard-primary' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M16 3.13a4 4 0 010 7.75M8 3.13a4 4 0 000 7.75'/></svg>
+                <svg xmlns='http://www.w3.org/2000/svg' className='h-7 w-7 text-dashboard-primary dark:text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M16 3.13a4 4 0 010 7.75M8 3.13a4 4 0 000 7.75'/></svg>
               </div>
               <h3 className="text-xl font-bold text-dashboard-primary mb-2">Our Team</h3>
               <p className="text-dashboard-primary dark:text-white">Join a diverse team of talented professionals passionate about technology and innovation.</p>
@@ -239,7 +239,7 @@ const Career = () => {
             {/* Card 3 */}
             <div className="bg-white dark:bg-slate-900 rounded-xl shadow p-8 flex flex-col items-center text-center border border-gray-100 dark:border-slate-800">
               <div className="bg-slate-200 dark:bg-slate-700 rounded-full h-14 w-14 flex items-center justify-center mb-8">
-                <svg xmlns='http://www.w3.org/2000/svg' className='h-7 w-7 text-dashboard-primary' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M3 7v4a1 1 0 001 1h3m10-5v4a1 1 0 01-1 1h-3m-4 4h6m2 0a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v6a2 2 0 002 2z'/></svg>
+                <svg xmlns='http://www.w3.org/2000/svg' className='h-7 w-7 text-dashboard-primary dark:text-white' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M3 7v4a1 1 0 001 1h3m10-5v4a1 1 0 01-1 1h-3m-4 4h6m2 0a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v6a2 2 0 002 2z'/></svg>
               </div>
               <h3 className="text-xl font-bold text-dashboard-primary mb-2">About ETNERD</h3>
               <p className="text-dashboard-primary dark:text-white">Learn more about our mission, vision, and the innovative solutions we provide.</p>
