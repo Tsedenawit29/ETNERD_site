@@ -369,7 +369,7 @@ const Home = () => {
           <h2 className="font-display text-3xl md:text-4xl font-bold mb-2 text-center bg-gradient-to-r from-dashboard-primary via-dashboard-accent to-dashboard-primary bg-clip-text text-transparent dark:from-white dark:via-dashboard-accent-dark dark:to-white">
             Our Valuable Partners
           </h2>
-          <p className="text-base md:text-lg text-dashboard-primary dark:text-dashboard-primary mb-8 text-center max-w-2xl">ETNERD is privileged to have a trusted network of partners who help us deliver world-class solutions and services to our clients.</p>
+          <p className="text-base md:text-lg text-dashboard-primary dark:text-white mb-8 text-center max-w-2xl">ETNERD is privileged to have a trusted network of partners who help us deliver world-class solutions and services to our clients.</p>
           <div className="flex flex-nowrap justify-center items-center gap-20 w-full overflow-x-auto px-8 mb-4">
             {/* Partner logos - full width, horizontal, animated */}
             <img src={amazonLogo} alt="Amazon Web Services" className="h-24 w-auto object-contain transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-partner-bounce-x" style={{ animationDelay: '0s' }} />
