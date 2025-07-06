@@ -51,15 +51,19 @@ module.exports = {
         },
         'dashboard-primary': {
           DEFAULT: '#133041',
-          light: '#1a4660',
+          light: '#3949ab',
           lighter: '#3a5a72',
           bright: '#eaf6ff',
+          dark: '#0b0e15',
+          bg: '#0b0e15',
         },
         'dashboard-accent': {
-          DEFAULT: '#e2631c',
-          dark: '#ff944d',
+          DEFAULT: '#ff9800',
+          dark: '#f57c00',
           light: '#fff4ed',
         },
+        'dashboard-primary-lightest': '#e8eaf6',
+        'dashboard-primary-dark': '#0b0e15',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -70,6 +74,30 @@ module.exports = {
         'hover': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
         'glow': '0 0 15px rgba(0, 92, 97, 0.5)',
         'glow-lg': '0 0 25px rgba(0, 92, 97, 0.7)',
+      },
+      keyframes: {
+        'partner-bounce-x': {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '50%': { transform: 'translateX(24px)' },
+        },
+        'pulse-slow': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '.5' },
+        },
+        'pulse-fast': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '.3' },
+        },
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+      },
+      animation: {
+        'partner-bounce-x': 'partner-bounce-x 2.5s ease-in-out infinite',
+        'pulse-slow': 'pulse-slow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'pulse-fast': 'pulse-fast 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'spin-slow': 'spin-slow 18s linear infinite',
       },
     },
   },

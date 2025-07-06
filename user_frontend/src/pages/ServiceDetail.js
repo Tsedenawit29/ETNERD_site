@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
+import ServiceIcon from '../components/ServiceIcon';
 
 const ServiceDetail = () => {
   const { id } = useParams();
@@ -60,6 +61,20 @@ const ServiceDetail = () => {
   if (loading) return <div className="text-center py-16">Loading...</div>;
   if (!service) return <div className="text-center py-16">Service not found.</div>;
 
+  // Parse features if present and is a string (for backward compatibility)
+  let features = [];
+  if (service.features) {
+    if (Array.isArray(service.features)) {
+      features = service.features;
+    } else if (typeof service.features === 'string') {
+      try {
+        features = JSON.parse(service.features);
+      } catch {
+        features = [];
+      }
+    }
+  }
+
   return (
     <section className="w-full min-h-[70vh] flex flex-col md:flex-row gap-8 px-4 md:px-16 py-12 bg-white dark:bg-black mt-20">
       <div className="w-full md:w-auto mb-6">
@@ -73,12 +88,28 @@ const ServiceDetail = () => {
       {/* Service Details */}
       <div className="flex-1 flex flex-col items-start justify-center">
         <div className="flex items-center mb-6 w-full">
-          {service.image_url && (
-            <img src={service.image_url} alt={service.title} className="w-20 h-20 object-cover rounded-full border-4  shadow mr-6" />
+          {service.image_url ? (
+            <img src={service.image_url} alt={service.title} className="w-20 h-20 object-cover rounded-full border-4 shadow mr-6" />
+          ) : (
+            <ServiceIcon iconName={service.icon_name} className="w-20 h-20 mr-6 text-dashboard-primary" />
           )}
           <h2 className="font-display text-3xl md:text-4xl font-bold text-dashboard-accent dark:text-dashboard-accent-dark mb-0">{service.title}</h2>
         </div>
-        <p className="text-dashboard-primary dark:text-white text-lg mb-4">{service.description || service.content}</p>
+        <p className="text-dashboard-primary dark:text-white text-lg mb-4">{service.description}</p>
+        <div className="text-dashboard-primary dark:text-white text-base mb-6 whitespace-pre-line">{service.content}</div>
+        {features.length > 0 && (
+          <div className="mt-6">
+            <h3 className="font-bold text-xl text-dashboard-primary dark:text-dashboard-primary-light mb-4">Why Choose Our {service.title} Service?</h3>
+            <ul className="list-none space-y-2">
+              {features.map((feature, idx) => (
+                <li key={idx} className="flex items-start gap-2">
+                  <span className="text-green-600 mt-1">&#10003;</span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
       {/* Book Service Form */}
       <div className="w-full md:w-[400px] bg-white/80 dark:bg-dashboard-primary/80 rounded-xl shadow-lg p-8 flex flex-col justify-center">

@@ -41,7 +41,7 @@ const NavBar = ({ ThemeToggleButton }) => {
   }, []);
 
   return (
-    <nav ref={navRef} className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-dashboard-primary shadow-soft transition-colors duration-200">
+    <nav ref={navRef} className="fixed top-0 left-0 w-full z-50 bg-white dark:bg-dashboard-primary-bg shadow-soft transition-colors duration-200">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3 md:py-4">
         {/* Logo */}
         <Link to="/" className="flex items-center cursor-pointer select-none flex-shrink-0">

@@ -1,44 +1,141 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import hero from '../asset/hero.jpg';
+import { FaLinkedin, FaFacebookSquare, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
+import hero from '../asset/hero.jpg'; // This image now functions as your primary logo visual
 
 const navItems = [
   { name: 'Home', path: '/' },
-  { name: 'About', path: '/about' },
-  { name: 'Services', path: '/services' },
-  { name: 'Initiatives', path: '/initiatives' },
+  { name: 'About Us', path: '/about' },
+  { name: 'Our Services', path: '/services' },
+  { name: 'Our Initiatives', path: '/initiatives' },
   { name: 'Capabilities', path: '/capabilities' },
-  { name: 'News', path: '/news' },
-  { name: 'Career', path: '/career' },
-  { name: 'Partner', path: '/partner' },
-  { name: 'Contact', path: '/contact' },
+  { name: 'News & Insights', path: '/news' },
+  { name: 'Careers', path: '/career' },
+  { name: 'Partnerships', path: '/partner' },
+  { name: 'Contact Us', path: '/contact' },
+];
+
+const policyItems = [
+  { name: 'Privacy Policy', path: '/privacy' },
+  { name: 'Terms of Service', path: '/terms' },
+  { name: 'FAQs', path: '/faqs' },
 ];
 
 const Footer = () => (
-  <footer className="w-full bg-dashboard-primary text-white shadow-soft pt-8 pb-4">
-    <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between px-4 gap-8">
-      <div className="flex-1 flex flex-col items-center md:items-start mb-6 md:mb-0">
-        <span className="font-display text-2xl font-bold mb-1">ETNERD Security Solutions</span>
-        <span className="text-sm text-dashboard-accent italic mb-3">Local Brains. Global Standards</span>
-        <nav className="flex flex-wrap gap-4 mt-2 justify-center md:justify-start">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              to={item.path}
-              className="text-white hover:text-dashboard-accent font-medium transition-colors text-sm"
-            >
-              {item.name}
+  <footer className="w-full bg-dashboard-primary text-white pt-16 pb-8 dark:bg-dashboard-primary-bg">
+    <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+      {/* Company Logo (Image) & Name Text Section */}
+      <div className="col-span-1 md:col-span-2 lg:col-span-1">
+        <div className="flex items-center gap-4 mb-6"> {/* Uses flexbox to place image and text horizontally */}
+          {/* Logo Image */}
+          {hero && (
+            <Link to="/" className="block flex-shrink-0"> {/* flex-shrink-0 prevents the image from resizing */}
+              <img
+                src={hero}
+                alt="ETNERD Security Solutions Logo"
+                className="w-20 h-20 object-cover rounded-lg shadow-lg border border-dashboard-accent/30" // Adjusted image size for better fit
+              />
             </Link>
-          ))}
-        </nav>
+          )}
+          {/* ETNERD Text */}
+          <div>
+            <h2 className="font-display text-3xl font-extrabold text-dashboard-accent leading-tight">
+              ETNERD
+            </h2>
+            <p className="text-white text-md font-medium tracking-wide">Security Solutions</p>
+          </div>
+        </div>
+
+        {/* Tagline and General Description */}
+        <p className="text-white/80 italic text-base mb-4">
+          Local Brains. Global Standards.
+        </p>
+        <p className="text-sm text-white/70 leading-relaxed">
+          Future-proof cybersecurity services with global standards and local insights.
+          Committed to securing your digital future.
+        </p>
       </div>
-      <div className="flex-shrink-0 w-full md:w-56 h-32 relative rounded-lg overflow-hidden">
-        <img src={hero} alt="Footer visual" className="object-cover w-full h-full opacity-80" />
-        <div className="absolute inset-0 bg-dashboard-primary opacity-40" />
+
+      {/* Quick Links Navigation Section */}
+      {/* Note: This section remains in its original column position relative to the grid */}
+      <div className="col-span-1">
+        <h3 className="font-semibold text-xl mb-4 text-white relative">
+          Quick Links
+          <span className="block w-10 h-0.5 bg-dashboard-accent mt-2"></span>
+        </h3>
+        <ul className="space-y-3">
+          {navItems.map((item) => (
+            <li key={item.name}>
+              <Link
+                to={item.path}
+                className="text-base text-white/80 hover:text-dashboard-accent transition-colors duration-300 transform hover:translate-x-1 inline-block"
+              >
+                {item.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Support & Legal Section */}
+      <div className="col-span-1">
+        <h3 className="font-semibold text-xl mb-4 text-white relative">
+          Support & Legal
+          <span className="block w-10 h-0.5 bg-dashboard-accent mt-2"></span>
+        </h3>
+        <ul className="space-y-3 mb-6">
+          {policyItems.map((item) => (
+            <li key={item.name}>
+              <Link
+                to={item.path}
+                className="text-base text-white/80 hover:text-dashboard-accent transition-colors duration-300 transform hover:translate-x-1 inline-block"
+              >
+                {item.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Contact Information & Social Media Section */}
+      <div className="col-span-1">
+        <h3 className="font-semibold text-xl mb-4 text-white relative">
+          Get in Touch
+          <span className="block w-10 h-0.5 bg-dashboard-accent mt-2"></span>
+        </h3>
+        <address className="not-italic text-sm text-white/70 space-y-3 mb-8">
+          <p>123 Security Lane,</p>
+          <p>Bole, Addis Ababa, Ethiopia</p>
+          <p className="flex items-center gap-2">
+            <FaEnvelope className="text-dashboard-accent text-lg" />
+            Email: <a href="mailto:info@etnerd.com" className="hover:text-dashboard-accent transition-colors">info@etnerd.com</a>
+          </p>
+          <p className="flex items-center gap-2">
+            <FaPhoneAlt className="text-dashboard-accent text-lg" />
+            Phone: <a href="tel:+251912345678" className="hover:text-dashboard-accent transition-colors">+251 912 345 678</a>
+          </p>
+        </address>
+
+        {/* Social Media Icons are now in this section */}
+        <h3 className="font-semibold text-lg mb-4 text-white">Follow Us</h3>
+        <div className="flex items-center gap-4">
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"
+             className="text-white/80 hover:text-dashboard-accent text-3xl transition-colors duration-300 transform hover:-translate-y-1">
+            <FaLinkedin />
+          </a>
+          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook Page"
+             className="text-white/80 hover:text-dashboard-accent text-3xl transition-colors duration-300 transform hover:-translate-y-1">
+            <FaFacebookSquare />
+          </a>
+        </div>
       </div>
     </div>
-    <div className="text-center text-xs text-white pt-4">&copy; {new Date().getFullYear()} ETNERD. All rights reserved.</div>
+
+    {/* Copyright Section */}
+    <div className="border-t border-white/20 mt-12 pt-6 text-center text-sm text-white/60">
+      &copy; {new Date().getFullYear()} ETNERD Security Solutions. All rights reserved.
+    </div>
   </footer>
 );
 
-export default Footer; 
+export default Footer;

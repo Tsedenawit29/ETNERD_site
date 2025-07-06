@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
+// This component works for both create and edit forms, always allowing upload or URL entry.
 const FileUpload = ({ onUpload, currentUrl, accept = '*/*' }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState(null);
@@ -110,6 +111,64 @@ const FileUpload = ({ onUpload, currentUrl, accept = '*/*' }) => {
             >
               Change URL
             </button>
+          </div>
+          {showUrlInput && (
+            <form onSubmit={handleUrlSubmit} className="mt-2 flex flex-col sm:flex-row gap-2">
+              <input
+                type="url"
+                value={urlInput}
+                onChange={(e) => setUrlInput(e.target.value)}
+                placeholder="Enter URL"
+                className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-dashboard-accent focus:border-dashboard-accent bg-white dark:bg-gray-900 text-gray-900 dark:text-white text-sm"
+                onClick={(e) => e.stopPropagation()}
+              />
+              <button
+                type="submit"
+                className="px-3 lg:px-4 py-2 bg-dashboard-accent text-white rounded-md hover:bg-dashboard-accent-dark transition-colors duration-200 text-sm"
+              >
+                Add URL
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowUrlInput(false);
+                  setUrlInput('');
+                }}
+                className="px-3 lg:px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md text-sm"
+              >
+                Cancel
+              </button>
+            </form>
+          )}
+          {/* Always show upload area in edit mode */}
+          <div
+            className={`border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4 lg:p-6 text-center transition-colors cursor-pointer hover:border-dashboard-accent dark:hover:border-dashboard-accent mt-2`}
+            onClick={() => fileInputRef.current?.click()}
+          >
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              accept={accept}
+              className="hidden"
+            />
+            {isUploading ? (
+              <div className="flex items-center justify-center">
+                <div className="animate-spin rounded-full h-6 w-6 lg:h-8 lg:w-8 border-b-2 border-dashboard-accent"></div>
+              </div>
+            ) : (
+              <div className="text-xs lg:text-sm text-gray-600 dark:text-gray-400">
+                <span className="font-medium text-dashboard-accent hover:text-dashboard-accent-dark">
+                  Click to upload
+                </span>{' '}
+                or drag and drop
+              </div>
+            )}
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              {accept === 'image/*'
+                ? 'PNG, JPG, GIF up to 10MB'
+                : 'Any file up to 10MB'}
+            </p>
           </div>
         </div>
       ) : (
