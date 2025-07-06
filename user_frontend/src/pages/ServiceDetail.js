@@ -115,11 +115,11 @@ const ServiceDetail = () => {
       <div className="w-full md:w-[400px] bg-white/80 dark:bg-dashboard-primary/80 rounded-xl shadow-lg p-8 flex flex-col justify-center">
         <h3 className="font-bold text-2xl text-dashboard-accent dark:text-dashboard-accent-dark mb-4">Book This Service</h3>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="Your Name" required className="px-4 py-2 rounded border border-gray-300 focus:ring-dashboard-accent focus:border-dashboard-accent" />
-          <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="Email" required className="px-4 py-2 rounded border border-gray-300 focus:ring-dashboard-accent focus:border-dashboard-accent" />
-          <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="Phone Number" required className="px-4 py-2 rounded border border-gray-300 focus:ring-dashboard-accent focus:border-dashboard-accent" />
-          <input type="date" name="date" value={form.date} onChange={handleChange} required className="px-4 py-2 rounded border border-gray-300 focus:ring-dashboard-accent focus:border-dashboard-accent" />
-          <textarea name="content" value={form.content} onChange={handleChange} placeholder="Additional Details (optional)" rows={3} className="px-4 py-2 rounded border border-gray-300 focus:ring-dashboard-accent focus:border-dashboard-accent" />
+          <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="Your Name" required className="px-4 py-2 rounded border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-dashboard-accent focus:border-dashboard-accent" />
+          <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="Email" required className="px-4 py-2 rounded border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-dashboard-accent focus:border-dashboard-accent" />
+          <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="Phone Number" required className="px-4 py-2 rounded border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-dashboard-accent focus:border-dashboard-accent" />
+          <input type="date" name="date" value={form.date} onChange={handleChange} required className="px-4 py-2 rounded border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-dashboard-accent focus:border-dashboard-accent" />
+          <textarea name="content" value={form.content} onChange={handleChange} placeholder="Additional Details (optional)" rows={3} className="px-4 py-2 rounded border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-dashboard-accent focus:border-dashboard-accent" />
           <button type="submit" disabled={submitting} className="mt-2 px-6 py-3 rounded-full bg-dashboard-accent text-white font-semibold shadow hover:bg-dashboard-accent-dark transition-all duration-200">
             {submitting ? 'Booking...' : 'Book Service'}
           </button>

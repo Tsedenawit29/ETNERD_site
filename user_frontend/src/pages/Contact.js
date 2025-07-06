@@ -40,7 +40,7 @@ const Contact = () => {
   return (
     <section className="py-20 bg-white dark:bg-dashboard-primary-bg text-dashboard-primary dark:text-white font-sans">
       <div className="max-w-7xl mx-auto px-6">
-        <h1 className="font-display text-4xl md:text-5xl font-bold mb-6 text-center bg-gradient-to-r from-dashboard-primary via-dashboard-accent to-dashboard-primary bg-clip-text text-transparent dark:from-white dark:via-dashboard-accent-dark dark:to-white drop-shadow-lg">
+        <h1 className="font-display text-4xl md:text-5xl font-bold mb-6 mt-3 text-center bg-gradient-to-r from-dashboard-primary via-dashboard-accent to-dashboard-primary bg-clip-text text-transparent dark:from-white dark:via-dashboard-accent-dark dark:to-white drop-shadow-lg">
           Get in Touch
         </h1>
         <p className="text-2xl text-center text-dashboard-primary dark:text-white mb-14 max-w-3xl mx-auto font-sans">

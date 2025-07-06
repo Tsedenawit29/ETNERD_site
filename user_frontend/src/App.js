@@ -13,6 +13,7 @@ import Career from './pages/Career';
 import Partner from './pages/Partner';
 import Contact from './pages/Contact';
 import ServiceDetail from './pages/ServiceDetail';
+import CVSubmit from './pages/CVSubmit';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               <Route path="/career" element={<Career />} />
               <Route path="/partner" element={<Partner />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/submit-cv" element={<CVSubmit />} />
             </Routes>
           </main>
           <Footer />
