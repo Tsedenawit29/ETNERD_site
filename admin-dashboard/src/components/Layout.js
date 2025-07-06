@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 import { useAuth } from '../context/AuthContext';
+import { supabase } from '../lib/supabaseClient';
 import logo from '../assets/hero.jpg';
 
 // Icon components
@@ -72,6 +73,44 @@ const Layout = ({ children }) => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [unseen, setUnseen] = useState({ contact: 0, booked: 0 });
+
+  // Fetch unseen counts
+  useEffect(() => {
+    const fetchUnseen = async () => {
+      try {
+        const [
+          { count: unseenContact },
+          { count: unseenBooked },
+        ] = await Promise.all([
+          supabase.from('et_contact_messages').select('*', { count: 'exact', head: true }).eq('seen', false),
+          supabase.from('et_book').select('*', { count: 'exact', head: true }).eq('seen', false),
+        ]);
+        setUnseen({
+          contact: unseenContact || 0,
+          booked: unseenBooked || 0,
+        });
+      } catch (error) {
+        setUnseen({ contact: 0, booked: 0 });
+      }
+    };
+    fetchUnseen();
+  }, []);
+
+  // Mark as seen when visiting Contact Messages or Booked Services
+  useEffect(() => {
+    const markAsSeen = async (table) => {
+      await supabase.from(table).update({ seen: true }).eq('seen', false);
+    };
+    if (location.pathname === '/contact-messages') {
+      markAsSeen('et_contact_messages');
+      setUnseen((prev) => ({ ...prev, contact: 0 }));
+    }
+    if (location.pathname === '/booked-services') {
+      markAsSeen('et_book');
+      setUnseen((prev) => ({ ...prev, booked: 0 }));
+    }
+  }, [location.pathname]);
 
   const menuItems = [
     { path: '/dashboard', label: 'Dashboard', icon: HomeIcon },
@@ -79,8 +118,8 @@ const Layout = ({ children }) => {
     { path: '/services', label: 'Services', icon: ResourcesIcon },
     { path: '/events', label: 'Events', icon: EventsIcon },
     { path: '/news', label: 'News', icon: NewsIcon },
-    { path: '/contact-messages', label: 'Contact Messages', icon: MessagesIcon },
-    { path: '/booked-services', label: 'Booked Services', icon: MessagesIcon },
+    { path: '/contact-messages', label: 'Contact Messages', icon: MessagesIcon, notification: unseen.contact },
+    { path: '/booked-services', label: 'Booked Services', icon: MessagesIcon, notification: unseen.booked },
   ];
 
   const handleSignOut = async () => {
@@ -153,7 +192,14 @@ const Layout = ({ children }) => {
                 }`}
               >
                 <IconComponent className="mr-3 h-5 w-5 flex-shrink-0" />
-                <span className="truncate">{item.label}</span>
+                <span className="truncate flex items-center gap-2">
+                  {item.label}
+                  {item.notification > 0 && (
+                    <span className="inline-flex items-center justify-center w-6 h-6 text-xs font-bold leading-none text-white bg-green-500 rounded-full ml-2">
+                      {item.notification}
+                    </span>
+                  )}
+                </span>
               </Link>
             );
           })}

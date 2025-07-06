@@ -14,6 +14,11 @@ const Home = () => {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const visibleCards = 3;
   const carouselInterval = useRef(null);
+  const [news, setNews] = useState([]);
+  const [newsLoading, setNewsLoading] = useState(true);
+  const [newsCarouselIndex, setNewsCarouselIndex] = useState(0);
+  const newsVisibleCards = 3;
+  const newsCarouselInterval = useRef(null);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -23,6 +28,20 @@ const Home = () => {
       setLoading(false);
     };
     fetchServices();
+  }, []);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      setNewsLoading(true);
+      const { data, error } = await supabase
+        .from('et_news')
+        .select('*')
+        .eq('active', true)
+        .order('published_date', { ascending: false });
+      if (!error) setNews(data || []);
+      setNewsLoading(false);
+    };
+    fetchNews();
   }, []);
 
   // Auto-slide carousel
@@ -48,6 +67,33 @@ const Home = () => {
     const result = [];
     for (let i = 0; i < visibleCards; i++) {
       result.push(services[(carouselIndex + i) % services.length]);
+    }
+    return result;
+  };
+
+  // Auto-slide carousel for news
+  useEffect(() => {
+    if (news.length > newsVisibleCards) {
+      newsCarouselInterval.current = setInterval(() => {
+        setNewsCarouselIndex((prev) => (prev + 1) % news.length);
+      }, 4000);
+      return () => clearInterval(newsCarouselInterval.current);
+    }
+  }, [news]);
+
+  const nextNewsSlide = () => {
+    setNewsCarouselIndex((prev) => (prev + 1) % news.length);
+  };
+  const prevNewsSlide = () => {
+    setNewsCarouselIndex((prev) => (prev - 1 + news.length) % news.length);
+  };
+
+  // Helper to get visible news for carousel
+  const getVisibleNews = () => {
+    if (news.length <= newsVisibleCards) return news;
+    const result = [];
+    for (let i = 0; i < newsVisibleCards; i++) {
+      result.push(news[(newsCarouselIndex + i) % news.length]);
     }
     return result;
   };
@@ -216,127 +262,124 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Latest News Section */}
-      <section className="w-full bg-gradient-to-br from-white to-gray-50 dark:from-black dark:to-gray-900 py-20 px-4 md:px-8">
+      {/* Latest News Section - Carousel */}
+      <section className="w-full bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-black py-20 px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-dashboard-primary via-dashboard-accent to-dashboard-primary bg-clip-text text-transparent dark:from-dashboard-primary dark:via-dashboard-accent-dark dark:to-dashboard-primary">
-              Latest <span className="font-bold">News</span>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-dashboard-primary via-dashboard-accent to-dashboard-primary bg-clip-text text-transparent dark:from-dashboard-primary dark:via-dashboard-accent-dark dark:to-dashboard-primary">
+              Latest News
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Stay updated with the latest cybersecurity trends, partnerships, and innovations from ETNERD.
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              Stay up to date with our latest announcements and stories.
             </p>
           </div>
-          
-          <div className="relative">
-            {/* Carousel Container */}
-            <div className="overflow-hidden">
-              <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${carouselIndex * 33.333}%)` }}>
-                {/* News Cards */}
-                {[{
-                  title: 'Cybersecurity Trends 2024',
-                  desc: 'Stay ahead with the latest in cyber defense and risk management strategies.',
-                  date: 'March 15, 2024',
-                  category: 'Trends',
-                  link: '/news'
-                }, {
-                  title: 'ETNERD Partners with GovTech',
-                  desc: 'Announcing our new partnership to secure public sector infrastructure across Ethiopia.',
-                  date: 'March 10, 2024',
-                  category: 'Partnerships',
-                  link: '/news'
-                }, {
-                  title: 'New Capacity Building Workshops',
-                  desc: 'Join our upcoming hands-on cybersecurity training sessions for IT professionals.',
-                  date: 'March 5, 2024',
-                  category: 'Training',
-                  link: '/news'
-                }, {
-                  title: 'AI-Powered Threat Detection',
-                  desc: 'Introducing our new AI-driven security monitoring and threat prevention system.',
-                  date: 'February 28, 2024',
-                  category: 'Innovation',
-                  link: '/news'
-                }, {
-                  title: 'Compliance Framework Updates',
-                  desc: 'Latest updates on international cybersecurity compliance standards and implementation.',
-                  date: 'February 20, 2024',
-                  category: 'Compliance',
-                  link: '/news'
-                }, {
-                  title: 'Digital Transformation Success',
-                  desc: 'How ETNERD helped Ethiopian businesses achieve secure digital transformation.',
-                  date: 'February 15, 2024',
-                  category: 'Success Stories',
-                  link: '/news'
-                }].map((news, idx) => (
-                  <div key={idx} className="w-full md:w-1/3 flex-shrink-0 px-4">
-                    <div className="bg-white dark:bg-dashboard-primary-bg rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-700 h-full">
-                      <div className="p-6">
-                        <div className="flex items-center justify-between mb-4">
-                          <span className="px-3 py-1 bg-dashboard-accent/10 text-dashboard-accent text-sm font-semibold rounded-full">
-                            {news.category}
-                          </span>
-                          <span className="text-sm text-gray-500 dark:text-gray-400">
-                            {news.date}
-                          </span>
+          {newsLoading ? (
+            <div className="text-center text-dashboard-primary dark:text-white text-xl">Loading news...</div>
+          ) : news.length === 0 ? (
+            <div className="text-center text-dashboard-primary dark:text-white text-lg">No news articles found.</div>
+          ) : (
+            <div className="relative">
+              {/* Left hover zone for moving left */}
+              {news.length > newsVisibleCards && (
+                <div
+                  className="absolute left-0 top-0 h-full w-1/4 z-20 cursor-pointer"
+                  onMouseEnter={() => {
+                    if (!newsCarouselInterval.current) {
+                      newsCarouselInterval.current = setInterval(() => {
+                        setNewsCarouselIndex((prev) => (prev - 1 + news.length) % news.length);
+                      }, 2000);
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    if (newsCarouselInterval.current) {
+                      clearInterval(newsCarouselInterval.current);
+                      newsCarouselInterval.current = null;
+                    }
+                  }}
+                />
+              )}
+              {/* Right hover zone for moving right */}
+              {news.length > newsVisibleCards && (
+                <div
+                  className="absolute right-0 top-0 h-full w-1/4 z-20 cursor-pointer"
+                  onMouseEnter={() => {
+                    if (!newsCarouselInterval.current) {
+                      newsCarouselInterval.current = setInterval(() => {
+                        setNewsCarouselIndex((prev) => (prev + 1) % news.length);
+                      }, 2000);
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    if (newsCarouselInterval.current) {
+                      clearInterval(newsCarouselInterval.current);
+                      newsCarouselInterval.current = null;
+                    }
+                  }}
+                />
+              )}
+              {/* Carousel Container */}
+              <div className="overflow-hidden">
+                <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${newsCarouselIndex * (100 / newsVisibleCards)}%)` }}>
+                  {news.map((item, idx) => (
+                    <div
+                      key={item.id}
+                      className="w-full md:w-1/3 flex-shrink-0 px-2"
+                      style={{ maxWidth: '350px', minWidth: '260px' }}
+                    >
+                      <div
+                        className="relative rounded-2xl shadow-lg overflow-hidden min-h-[220px] flex flex-col justify-end group border border-dashboard-accent/10 h-full bg-white dark:bg-dashboard-primary-bg"
+                      >
+                        {/* Published date at top right, with more space */}
+                        <span className="absolute top-4 right-6 text-xs text-dashboard-accent font-semibold bg-white/80 dark:bg-dashboard-primary-bg/80 px-3 py-1 rounded-full z-10 shadow-md">
+                          {item.published_date ? new Date(item.published_date).toLocaleDateString() : ''}
+                        </span>
+                        <div className="relative z-10 p-4 flex flex-col h-full justify-end">
+                          <h3 className="text-lg font-bold text-dashboard-primary dark:text-white font-display mb-1 line-clamp-2 mt-8">
+                            {item.headline}
+                          </h3>
+                          <p className="text-dashboard-primary/80 dark:text-gray-200 text-sm mb-3 line-clamp-3">
+                            {item.content.split(' ').slice(0, 20).join(' ')}{item.content.split(' ').length > 20 ? '...' : ''}
+                          </p>
+                          <Link
+                            to="/news"
+                            className="inline-flex items-center text-dashboard-accent font-semibold hover:text-orange-600 transition-colors duration-200 text-sm mt-auto"
+                          >
+                            Read more
+                            <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                          </Link>
                         </div>
-                        <h3 className="font-display text-xl font-bold text-dashboard-primary dark:text-white mb-3 line-clamp-2">
-                          {news.title}
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed line-clamp-3">
-                          {news.desc}
-                        </p>
-                        <Link 
-                          to={news.link} 
-                          className="inline-flex items-center text-dashboard-accent font-semibold hover:text-dashboard-accent-dark transition-colors duration-200"
-                        >
-                          Read More
-                          <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </Link>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
+              {/* Navigation Arrows */}
+              {news.length > newsVisibleCards && (
+                <>
+                  <button
+                    onClick={prevNewsSlide}
+                    className="absolute left-2 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 z-30"
+                    aria-label="Previous news"
+                  >
+                    <svg className="w-5 h-5 text-dashboard-primary dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={nextNewsSlide}
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 z-30"
+                    aria-label="Next news"
+                  >
+                    <svg className="w-5 h-5 text-dashboard-primary dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </>
+              )}
             </div>
-            
-            {/* Navigation Arrows */}
-            <button 
-              onClick={prevSlide}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
-            >
-              <svg className="w-6 h-6 text-dashboard-primary dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            
-            <button 
-              onClick={nextSlide}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
-            >
-              <svg className="w-6 h-6 text-dashboard-primary dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-          
-          {/* Carousel Indicators */}
-          <div className="flex justify-center mt-8 space-x-2">
-            {Array.from({ length: Math.ceil(6 / 3) }, (_, i) => (
-              <button
-                key={i}
-                onClick={() => setCarouselIndex(i)}
-                className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                  carouselIndex === i 
-                    ? 'bg-dashboard-accent w-8' 
-                    : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
-                }`}
-              />
-            ))}
-          </div>
+          )}
         </div>
       </section>
 

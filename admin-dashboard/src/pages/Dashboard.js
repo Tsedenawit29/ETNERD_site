@@ -4,11 +4,11 @@ import { useAuth } from '../context/AuthContext';
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
-    ourWork: 0,
-    services: 0,
-    events: 0,
-    news: 0,
-    contactMessages: 0,
+    et_ourWork: 0,
+    et_services: 0,
+    et_events: 0,
+    et_news: 0,
+    et_contactMessages: 0,
   });
 
   const [recentActions, setRecentActions] = useState([
@@ -54,12 +54,14 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
+        console.log('Fetching dashboard stats...');
+        
         const [
-          { count: et_ourWork },
-          { count: et_services },
-          { count: et_events },
-          { count: et_news },
-          { count: et_contactMessages },
+          { count: et_ourWork, error: ourWorkError },
+          { count: et_services, error: servicesError },
+          { count: et_events, error: eventsError },
+          { count: et_news, error: newsError },
+          { count: et_contactMessages, error: contactError },
         ] = await Promise.all([
           supabase.from('et_our_work').select('*', { count: 'exact', head: true }),
           supabase.from('et_services').select('*', { count: 'exact', head: true }),
@@ -68,15 +70,33 @@ const Dashboard = () => {
           supabase.from('et_contact_messages').select('*', { count: 'exact', head: true }),
         ]);
 
-        setStats({
-          et_ourWork,
-          et_services,
-          et_events,
-          et_news,
-          et_contactMessages,
-        });
+        // Log any errors
+        if (ourWorkError) console.error('Our Work Error:', ourWorkError);
+        if (servicesError) console.error('Services Error:', servicesError);
+        if (eventsError) console.error('Events Error:', eventsError);
+        if (newsError) console.error('News Error:', newsError);
+        if (contactError) console.error('Contact Error:', contactError);
+
+        const newStats = {
+          et_ourWork: et_ourWork || 0,
+          et_services: et_services || 0,
+          et_events: et_events || 0,
+          et_news: et_news || 0,
+          et_contactMessages: et_contactMessages || 0,
+        };
+
+        console.log('Dashboard stats:', newStats);
+        setStats(newStats);
       } catch (error) {
         console.error('Error fetching stats:', error);
+        // Set default values if there's an error
+        setStats({
+          et_ourWork: 0,
+          et_services: 0,
+          et_events: 0,
+          et_news: 0,
+          et_contactMessages: 0,
+        });
       }
     };
 
@@ -139,27 +159,27 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 lg:gap-6 mb-8">
         <StatCard
           title="Our Work Items"
-          value={stats.ourWork}
+          value={stats.et_ourWork}
           color="bg-dashboard-primary/20 dark:bg-dashboard-primary DEFAULT/20"
         />
         <StatCard
           title="Services"
-          value={stats.services}
+          value={stats.et_services}
           color="bg-dashboard-primary/20 dark:bg-dashboard-primary DEFAULT/20"
         />
         <StatCard
           title="Events"
-          value={stats.events}
+          value={stats.et_events}
           color="bg-blue-900/20"
         />
         <StatCard
           title="News Articles"
-          value={stats.news}
+          value={stats.et_news}
           color="bg-blue-900/20"
         />
         <StatCard
           title="Contact Messages"
-          value={stats.contactMessages}
+          value={stats.et_contactMessages}
           color="bg-blue-900/20"
         />
       </div>

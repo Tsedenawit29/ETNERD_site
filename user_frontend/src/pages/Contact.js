@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
+import { supabase } from '../supabaseClient';
 
 const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
@@ -16,11 +17,16 @@ const Contact = () => {
     setStatus('Sending your message...');
 
     try {
-      // Simulate API call for Supabase (replace with actual integration)
-      console.log('Form Data Submitted:', form);
-      // In a real application, you'd send form.name, form.email, form.subject, form.message to your backend/Supabase
-      await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate network delay
-
+      const { error } = await supabase.from('et_contact_messages').insert([
+        {
+          name: form.name,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
+          seen: false,
+        }
+      ]);
+      if (error) throw error;
       setStatus('Message sent successfully! We will get back to you shortly.');
       setForm({ name: '', email: '', subject: '', message: '' }); // Clear form on success
     } catch (error) {

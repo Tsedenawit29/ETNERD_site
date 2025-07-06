@@ -1,6 +1,6 @@
 import DataTable from '../../components/DataTable';
 
-const BookedServices = () => {
+const BookedServices = ({ onBookingSeen }) => {
   const columns = [
     { key: 'service', label: 'Service' },
     { key: 'name', label: 'Name' },
@@ -25,6 +25,7 @@ const BookedServices = () => {
       columns={columns}
       title="Booked Services"
       disableAddNew={true}
+      onItemSeen={onBookingSeen}
     />
   );
 };

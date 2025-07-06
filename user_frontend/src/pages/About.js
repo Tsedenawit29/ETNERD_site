@@ -1,16 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import experts from '../asset/experts.jpg';
-import security from '../asset/security.jpg';
-import globalstandards from '../asset/globalstandards.jpg';
-import proactive from '../asset/proactive approach.jpg';
 
 const About = () => {
-  const navigate = useNavigate();
-
-  const handleContactClick = () => {
-    navigate('/contact');
-  };
 
   return (
   <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-black dark:via-black dark:to-black">
@@ -47,8 +39,8 @@ const About = () => {
               Our Mission & Vision
             </h2>
             <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-              At ETNERD Security Solutions, we deliver top-notch, enterprise-wide solutions with a strong focus on cybersecurity, IT infrastructure, and digital transformation. Our mission is to empower businesses with secure, scalable, and innovative technologies that protect their assets, enhance performance, and drive sustainable growth.
-            </p>
+      At ETNERD Security Solutions, we deliver top-notch, enterprise-wide solutions with a strong focus on cybersecurity, IT infrastructure, and digital transformation. Our mission is to empower businesses with secure, scalable, and innovative technologies that protect their assets, enhance performance, and drive sustainable growth.
+    </p>
                          <div className="flex items-center space-x-4 pt-4">
                <div className="w-12 h-12 bg-dashboard-primary rounded-full flex items-center justify-center">
                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -168,8 +160,8 @@ const About = () => {
               Tailored Solutions for Your Business
             </h2>
             <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-              Whether you're looking to strengthen your cyber defense, modernize your systems, or optimize your operations, our team of experts is committed to providing tailored services that align with your unique business needs. We bring deep industry experience, global standards, and a proactive approach to help our clients stay ahead in an ever-evolving digital landscape.
-            </p>
+      Whether you're looking to strengthen your cyber defense, modernize your systems, or optimize your operations, our team of experts is committed to providing tailored services that align with your unique business needs. We bring deep industry experience, global standards, and a proactive approach to help our clients stay ahead in an ever-evolving digital landscape.
+    </p>
             
                          {/* Feature cards */}
              <div className="grid md:grid-cols-2 gap-4 pt-6">
@@ -203,17 +195,23 @@ const About = () => {
           Let's discuss how ETNERD Security Solutions can help you achieve your goals
         </p>
         <div className="flex justify-center">
-          <button 
-            onClick={handleContactClick}
-            className="bg-white text-dashboard-primary px-12 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105 text-lg"
-          >
-            Contact Us
-          </button>
+          <Link
+              to="/contact"
+              className="px-6 py-3 rounded-full bg-dashboard-accent text-white font-semibold shadow-lg shadow-black/30 hover:bg-dashboard-accent-dark transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl"
+            >
+             Explore our Services
+            </Link>
+            <Link
+              to="/services"
+              className="px-6 py-3 rounded-full border-2 mx-4 border-white text-white bg-transparent font-semibold shadow-lg shadow-black/30 hover:bg-dashboard-accent hover:text-white transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl"
+            >
+              Contact Us
+            </Link>
         </div>
       </div>
-    </section>
+  </section>
   </div>
-  );
+);
 };
 
 export default About; 

@@ -102,7 +102,7 @@ const ServiceDetail = () => {
             <h3 className="font-bold text-xl text-dashboard-primary dark:text-dashboard-primary-light mb-4">Why Choose Our {service.title} Service?</h3>
             <ul className="list-none space-y-2">
               {features.map((feature, idx) => (
-                <li key={idx} className="flex items-start gap-2">
+                <li key={idx} className="flex items-start gap-2 dark:text-white">
                   <span className="text-green-600 mt-1">&#10003;</span>
                   <span>{feature}</span>
                 </li>

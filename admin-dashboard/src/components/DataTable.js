@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import FileUpload from './FileUpload';
 import Modal from './Modal';
@@ -12,6 +12,7 @@ const DataTable = ({
   onDelete,
   onAdd,
   disableAddNew = false,
+  onItemSeen,
 }) => {
   console.log('DataTable received formFields:', formFields);
   console.log('Table name:', tableName);
@@ -34,9 +35,33 @@ const DataTable = ({
     item: null
   });
 
+  const detailsModalRef = useRef(detailsModal);
+
   useEffect(() => {
     fetchData();
   }, [tableName]);
+
+  useEffect(() => {
+    // When details modal opens for et_book, mark as seen
+    if (
+      detailsModal.isOpen &&
+      tableName === 'et_book' &&
+      detailsModal.item &&
+      detailsModal.item.seen === false
+    ) {
+      const markBookingSeen = async () => {
+        await supabase.from('et_book').update({ seen: true }).eq('id', detailsModal.item.id);
+        // Optionally update local data
+        setData((prev) =>
+          prev.map((row) =>
+            row.id === detailsModal.item.id ? { ...row, seen: true } : row
+          )
+        );
+        if (onItemSeen) onItemSeen(detailsModal.item.id);
+      };
+      markBookingSeen();
+    }
+  }, [detailsModal, tableName]);
 
   const fetchData = async () => {
     try {
