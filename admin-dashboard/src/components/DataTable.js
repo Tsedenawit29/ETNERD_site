@@ -913,6 +913,40 @@ const DataTable = ({
           </div>
         );
 
+      case 'et_jobs':
+        return (
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-dashboard-primary dark:text-dashboard-primary-bright mb-2">
+                  Title <span className="text-red-500 ml-1">*</span>
+                </label>
+                {renderFormField(formFields.find(f => f.name === 'title'))}
+              </div>
+              <div className="flex flex-col justify-end">
+                <label className="block text-sm font-medium text-dashboard-primary dark:text-dashboard-primary-bright mb-2">
+                  Active
+                </label>
+                {renderFormField(formFields.find(f => f.name === 'active'))}
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-dashboard-primary dark:text-dashboard-primary-bright mb-2">
+                  Specification <span className="text-red-500 ml-1">*</span>
+                </label>
+                {renderFormField(formFields.find(f => f.name === 'specficaton'))}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-dashboard-primary dark:text-dashboard-primary-bright mb-2">
+                  Eligibility <span className="text-red-500 ml-1">*</span>
+                </label>
+                {renderFormField(formFields.find(f => f.name === 'elgblity'))}
+              </div>
+            </div>
+          </div>
+        );
+
       default:
         return (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">

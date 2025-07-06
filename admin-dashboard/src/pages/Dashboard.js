@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import { useAuth } from '../context/AuthContext';
+import Jobs from './crud/Jobs';
+import CareerView from './crud/CareerView';
 
 const Dashboard = () => {
   const [stats, setStats] = useState({

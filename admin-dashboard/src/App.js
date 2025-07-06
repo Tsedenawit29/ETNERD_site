@@ -10,6 +10,8 @@ import Events from './pages/crud/Events';
 import News from './pages/crud/News';
 import ContactMessages from './pages/crud/ContactMessages';
 import BookedServices from './pages/crud/BookedServices';
+import Jobs from './pages/crud/Jobs';
+import CareerView from './pages/crud/CareerView';
 import PrivateRoute from './components/PrivateRoute';
 import Layout from './components/Layout';
 
@@ -29,6 +31,8 @@ function App() {
               <Route path="news" element={<News />} />
               <Route path="contact-messages" element={<ContactMessages />} />
               <Route path="booked-services" element={<BookedServices />} />
+              <Route path="jobs" element={<Jobs />} />
+              <Route path="career-view" element={<CareerView />} />
             </Route>
           </Routes>
         </ThemeProvider>

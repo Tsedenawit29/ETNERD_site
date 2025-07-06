@@ -68,6 +68,18 @@ const Avatar = ({ email, size = 32 }) => {
   );
 };
 
+const BriefcaseIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 7V4a2 2 0 012-2h8a2 2 0 012 2v3M6 7h12M6 7a2 2 0 00-2 2v9a2 2 0 002 2h12a2 2 0 002-2V9a2 2 0 00-2-2M9 17v-2a2 2 0 012-2h2a2 2 0 012 2v2" />
+  </svg>
+);
+
+const FileIcon = ({ className }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7V3a2 2 0 012-2h6a2 2 0 012 2v4M7 7h10M7 7a2 2 0 00-2 2v9a2 2 0 002 2h10a2 2 0 002-2V9a2 2 0 00-2-2M9 17v-2a2 2 0 012-2h2a2 2 0 012 2v2" />
+  </svg>
+);
+
 const Layout = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -118,6 +130,8 @@ const Layout = ({ children }) => {
     { path: '/services', label: 'Services', icon: ResourcesIcon },
     { path: '/events', label: 'Events', icon: EventsIcon },
     { path: '/news', label: 'News', icon: NewsIcon },
+    { path: '/jobs', label: 'Jobs', icon: BriefcaseIcon },
+    { path: '/career-view', label: 'Career Submissions', icon: FileIcon },
     { path: '/contact-messages', label: 'Contact Messages', icon: MessagesIcon, notification: unseen.contact },
     { path: '/booked-services', label: 'Booked Services', icon: MessagesIcon, notification: unseen.booked },
   ];
