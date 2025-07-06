@@ -22,9 +22,21 @@ const Career = () => {
     fetchJobs();
   }, []);
 
+  // For text/select/textarea fields
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    setForm((prev) => ({ ...prev, [name]: files ? files[0] : value }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // For file input
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type === 'application/pdf') {
+      setForm((prev) => ({ ...prev, file }));
+      setError('');
+    } else {
+      setError('Only PDF files are allowed.');
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -34,20 +46,22 @@ const Career = () => {
     setSuccess(false);
     let file_url = null;
     try {
-      if (form.file) {
-        // Only allow PDF
-        if (form.file.type !== 'application/pdf') {
-          setError('Only PDF files are allowed.');
-          setLoading(false);
-          return;
-        }
-        // Upload to etfiles storage
-        const { data: uploadData, error: uploadError } = await supabase.storage.from('etfiles').upload(`cvs/${Date.now()}_${form.file.name}`, form.file);
-        if (uploadError) throw uploadError;
-        // Get public URL
-        const { data: publicUrlData } = supabase.storage.from('etfiles').getPublicUrl(uploadData.path);
-        file_url = publicUrlData.publicUrl;
+      if (!form.file) {
+        setError('Please upload a PDF file.');
+        setLoading(false);
+        return;
       }
+      if (form.file.type !== 'application/pdf') {
+        setError('Only PDF files are allowed.');
+        setLoading(false);
+        return;
+      }
+      // Upload to etfiles storage
+      const { data: uploadData, error: uploadError } = await supabase.storage.from('etfiles').upload(`cvs/${Date.now()}_${form.file.name}`, form.file);
+      if (uploadError) throw uploadError;
+      // Get public URL
+      const { data: publicUrlData } = supabase.storage.from('etfiles').getPublicUrl(uploadData.path);
+      file_url = publicUrlData.publicUrl;
       const { error: insertError } = await supabase.from('et_career').insert([
         {
           full_name: form.full_name,
@@ -58,7 +72,12 @@ const Career = () => {
           file_url,
         },
       ]);
-      if (insertError) throw insertError;
+      if (insertError) {
+        console.error('Supabase insert error:', insertError);
+        setError(insertError.message || 'Failed to submit. Please try again.');
+        setLoading(false);
+        return;
+      }
       setSuccess(true);
       setForm({ full_name: '', email: '', phone: '', subject: '', message: '', file: null });
     } catch (err) {
@@ -71,13 +90,37 @@ const Career = () => {
   // Simple Modal
   const Modal = ({ open, onClose, children }) =>
     open ? (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-        <div className="bg-white dark:bg-slate-900 rounded-xl p-6 w-full max-w-md relative">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-2">
+        <div className="bg-white dark:bg-slate-900 rounded-xl p-6 w-full max-w-2xl min-w-[320px] md:min-w-[500px] relative flex flex-col">
           <button onClick={onClose} className="absolute top-2 right-2 text-xl text-gray-400 hover:text-red-500">&times;</button>
           {children}
         </div>
       </div>
     ) : null;
+
+  // Drag and drop file upload
+  const [dragActive, setDragActive] = useState(false);
+  const fileInputRef = React.useRef();
+  const handleDrag = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === 'dragenter' || e.type === 'dragover') setDragActive(true);
+    else if (e.type === 'dragleave') setDragActive(false);
+  };
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      const file = e.dataTransfer.files[0];
+      if (file.type === 'application/pdf') {
+        setForm((prev) => ({ ...prev, file }));
+        setError('');
+      } else {
+        setError('Only PDF files are allowed.');
+      }
+    }
+  };
 
   if (jobs === null) {
     return <div className="flex justify-center items-center min-h-[60vh] text-lg">Loading...</div>;
@@ -109,57 +152,98 @@ const Career = () => {
           {success ? (
             <div className="text-green-600 font-semibold">Thank you! Your CV has been submitted.</div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-              <input
-                type="text"
-                name="full_name"
-                placeholder="Full Name"
-                value={form.full_name}
-                onChange={handleChange}
-                className="border rounded px-3 py-2"
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={form.email}
-                onChange={handleChange}
-                className="border rounded px-3 py-2"
-                required
-              />
-              <input
-                type="text"
-                name="phone"
-                placeholder="Phone"
-                value={form.phone}
-                onChange={handleChange}
-                className="border rounded px-3 py-2"
-              />
-              <input
-                type="text"
-                name="subject"
-                placeholder="Subject"
-                value={form.subject}
-                onChange={handleChange}
-                className="border rounded px-3 py-2"
-              />
-              <textarea
-                name="message"
-                placeholder="Message"
-                value={form.message}
-                onChange={handleChange}
-                className="border rounded px-3 py-2"
-                rows={3}
-              />
-              <input
-                type="file"
-                name="file"
-                accept="application/pdf"
-                onChange={handleChange}
-                className="border rounded px-3 py-2"
-                required
-              />
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4" autoComplete="off">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold mb-1">Full Name <span className="text-red-500">*</span></label>
+                  <input
+                    type="text"
+                    name="full_name"
+                    placeholder="John Doe"
+                    value={form.full_name}
+                    onChange={handleChange}
+                    className="border rounded px-3 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-1">Email Address <span className="text-red-500">*</span></label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="john@example.com"
+                    value={form.email}
+                    onChange={handleChange}
+                    className="border rounded px-3 py-2 w-full"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-1">Phone Number <span className="text-gray-400 text-xs">(Optional)</span></label>
+                <input
+                  type="text"
+                  name="phone"
+                  placeholder="(123) 456-7890"
+                  value={form.phone}
+                  onChange={handleChange}
+                  className="border rounded px-3 py-2 w-full"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-1">Subject <span className="text-red-500">*</span></label>
+                <select
+                  name="subject"
+                  value={form.subject}
+                  onChange={handleChange}
+                  className="border rounded px-3 py-2 w-full"
+                  required
+                >
+                  <option value="">Select a topic</option>
+                  <option value="Job Application">Job Application</option>
+                  <option value="Internship">Internship</option>
+                  <option value="General Inquiry">General Inquiry</option>
+                </select>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold mb-1">Message <span className="text-red-500">*</span></label>
+                  <textarea
+                    name="message"
+                    placeholder="How can we help you?"
+                    value={form.message}
+                    onChange={handleChange}
+                    className="border rounded px-3 py-2 w-full"
+                    rows={4}
+                    required
+                  />
+                </div>
+                <div
+                  className={`border-2 border-dashed rounded-lg px-4 py-6 text-center cursor-pointer transition ${dragActive ? 'border-dashboard-accent bg-dashboard-accent/10' : 'border-gray-300 bg-gray-50 dark:bg-slate-800'}`}
+                  onDragEnter={handleDrag}
+                  onDragLeave={handleDrag}
+                  onDragOver={handleDrag}
+                  onDrop={handleDrop}
+                  onClick={() => fileInputRef.current && fileInputRef.current.click()}
+                >
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    name="file"
+                    accept="application/pdf"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+                  <div className="flex flex-col items-center justify-center">
+                    <svg className="w-8 h-8 mb-2 text-dashboard-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16v-4a4 4 0 014-4 4 4 0 014 4v4m-4 4v-4m0 0V4m0 12l-4-4m4 4l4-4" />
+                    </svg>
+                    <span className="font-semibold">Drag & drop your PDF here, or <span className="underline text-dashboard-accent">choose file</span></span>
+                    <span className="text-xs text-gray-500 mt-1">PDF only. Max 5MB.</span>
+                    {form.file && <span className="block mt-2 text-green-600 font-semibold">{form.file.name}</span>}
+                  </div>
+                </div>
+              </div>
               {error && <div className="text-red-600 text-sm">{error}</div>}
               <button
                 type="submit"
@@ -246,57 +330,98 @@ const Career = () => {
           {success ? (
             <div className="text-green-600 font-semibold">Thank you! Your CV has been submitted.</div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-              <input
-                type="text"
-                name="full_name"
-                placeholder="Full Name"
-                value={form.full_name}
-                onChange={handleChange}
-                className="border rounded px-3 py-2"
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={form.email}
-                onChange={handleChange}
-                className="border rounded px-3 py-2"
-                required
-              />
-              <input
-                type="text"
-                name="phone"
-                placeholder="Phone"
-                value={form.phone}
-                onChange={handleChange}
-                className="border rounded px-3 py-2"
-              />
-              <input
-                type="text"
-                name="subject"
-                placeholder="Subject"
-                value={form.subject}
-                onChange={handleChange}
-                className="border rounded px-3 py-2"
-              />
-              <textarea
-                name="message"
-                placeholder="Message"
-                value={form.message}
-                onChange={handleChange}
-                className="border rounded px-3 py-2"
-                rows={3}
-              />
-              <input
-                type="file"
-                name="file"
-                accept="application/pdf"
-                onChange={handleChange}
-                className="border rounded px-3 py-2"
-                required
-              />
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4" autoComplete="off">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold mb-1">Full Name <span className="text-red-500">*</span></label>
+                  <input
+                    type="text"
+                    name="full_name"
+                    placeholder="John Doe"
+                    value={form.full_name}
+                    onChange={handleChange}
+                    className="border rounded px-3 py-2 w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-1">Email Address <span className="text-red-500">*</span></label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="john@example.com"
+                    value={form.email}
+                    onChange={handleChange}
+                    className="border rounded px-3 py-2 w-full"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-1">Phone Number <span className="text-gray-400 text-xs">(Optional)</span></label>
+                <input
+                  type="text"
+                  name="phone"
+                  placeholder="(123) 456-7890"
+                  value={form.phone}
+                  onChange={handleChange}
+                  className="border rounded px-3 py-2 w-full"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-1">Subject <span className="text-red-500">*</span></label>
+                <select
+                  name="subject"
+                  value={form.subject}
+                  onChange={handleChange}
+                  className="border rounded px-3 py-2 w-full"
+                  required
+                >
+                  <option value="">Select a topic</option>
+                  <option value="Job Application">Job Application</option>
+                  <option value="Internship">Internship</option>
+                  <option value="General Inquiry">General Inquiry</option>
+                </select>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold mb-1">Message <span className="text-red-500">*</span></label>
+                  <textarea
+                    name="message"
+                    placeholder="How can we help you?"
+                    value={form.message}
+                    onChange={handleChange}
+                    className="border rounded px-3 py-2 w-full"
+                    rows={4}
+                    required
+                  />
+                </div>
+                <div
+                  className={`border-2 border-dashed rounded-lg px-4 py-6 text-center cursor-pointer transition ${dragActive ? 'border-dashboard-accent bg-dashboard-accent/10' : 'border-gray-300 bg-gray-50 dark:bg-slate-800'}`}
+                  onDragEnter={handleDrag}
+                  onDragLeave={handleDrag}
+                  onDragOver={handleDrag}
+                  onDrop={handleDrop}
+                  onClick={() => fileInputRef.current && fileInputRef.current.click()}
+                >
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    name="file"
+                    accept="application/pdf"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+                  <div className="flex flex-col items-center justify-center">
+                    <svg className="w-8 h-8 mb-2 text-dashboard-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16v-4a4 4 0 014-4 4 4 0 014 4v4m-4 4v-4m0 0V4m0 12l-4-4m4 4l4-4" />
+                    </svg>
+                    <span className="font-semibold">Drag & drop your PDF here, or <span className="underline text-dashboard-accent">choose file</span></span>
+                    <span className="text-xs text-gray-500 mt-1">PDF only. Max 5MB.</span>
+                    {form.file && <span className="block mt-2 text-green-600 font-semibold">{form.file.name}</span>}
+                  </div>
+                </div>
+              </div>
               {error && <div className="text-red-600 text-sm">{error}</div>}
               <button
                 type="submit"
