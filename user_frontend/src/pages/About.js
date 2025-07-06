@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import experts from '../asset/experts.jpg';
+import aboutHero from '../asset/about.png';
 
 const About = () => {
 
@@ -8,8 +9,15 @@ const About = () => {
   <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-black dark:via-black dark:to-black">
     {/* Hero Section */}
     <section className="relative h-96 flex items-center justify-center overflow-hidden">
-      {/* Background with animated elements */}
-      <div className="absolute inset-0 bg-gradient-to-r from-dashboard-primary via-sai-teal-500 to-dashboard-accent opacity-90"></div>
+      {/* Background Image */}
+      <img
+        src={aboutHero}
+        alt="About ETNERD Hero"
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        style={{ objectPosition: 'center' }}
+      />
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 bg-gradient-to-r from-dashboard-primary via-sai-teal-500 to-dashboard-accent opacity-80"></div>
       <div className="absolute inset-0 bg-black opacity-20"></div>
       
       {/* Animated background elements */}
