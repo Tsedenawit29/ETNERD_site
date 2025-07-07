@@ -2,11 +2,12 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient'; // Ensure supabaseClient is correctly configured
 import ServiceIcon from '../components/ServiceIcon'; // Assuming ServiceIcon component exists
-import etnerdImage from '../asset/etnerd2.jpg'; // Your background hero image
-import amazonLogo from '../asset/amazon.png';
+import etnerdImage from '../asset/hero2.jpg'; // Your background hero image
+import RasbyteLogo from '../asset/rasbytepartner.png';
 import compassLogo from '../asset/compass.png';
-import paloAltoLogo from '../asset/palloalto.png';
+import ipv6etLogo from '../asset/ipv6.png';
 import cdiLogo from '../asset/cdi.png';
+import SaiaLogo from '../asset/saia.jpg';
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -106,7 +107,7 @@ const Home = () => {
         <img
           src={etnerdImage}
           alt="ETNERD Hero Background - Ethiopian Map"
-          className="absolute inset-0 w-full h-full object-contain z-0 animate-continuous-move"
+          className="absolute inset-0 w-full h-full object-cover z-0 hero-zoom hero-lightup hero-glow hero-frontback"
         />
         {/* Dark shadow overlay that gradually lightens */}
         <div className="absolute inset-0 z-10 bg-gradient-to-br from-black/80 via-black/60 to-black/40 dark:from-black/90 dark:via-black/70 dark:to-black/50 animate-shadow-lift" />
@@ -126,10 +127,10 @@ const Home = () => {
           {/* Ethiopian flag colors accent */}
           <div className="absolute top-8 left-8 w-16 h-2 bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 rounded-full opacity-60 animate-pulse-slow" />
           <div className="absolute top-8 right-8 w-16 h-2 bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 rounded-full opacity-60 animate-pulse-slow" />
-          <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight drop-shadow-lg animate-fade-in mt-16">
+          <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-white mb-4 tracking-tight drop-shadow-lg animate-fade-in hero-title-bold" style={{ marginTop: '5.5rem' }}>
             Local Brains. <span className="text-dashboard-accent">Global Standards.</span>
           </h1>
-          <p className="max-w-4xl text-base md:text-lg lg:text-xl text-gray-200 mb-8 animate-slide-up drop-shadow leading-relaxed mt-6">
+          <p className="max-w-4xl text-base md:text-lg lg:text-xl text-gray-200 mb-8 animate-slide-up drop-shadow leading-relaxed hero-desc-bold" style={{ marginTop: '2.5rem' }}>
             At <span className="text-dashboard-accent font-semibold">ETNERD Security Solutions</span>, we harness the power of Ethiopian innovation and global expertise to deliver world-class cybersecurity, IT infrastructure, and digital transformation solutions. Our mission is to empower businesses with secure, scalable, and innovative technologies that protect their assets, enhance performance, and drive sustainable growth across Africa and beyond.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mt-4 animate-fade-in">
@@ -414,10 +415,11 @@ const Home = () => {
           <p className="text-base md:text-lg text-dashboard-primary dark:text-white mb-8 text-center max-w-2xl">ETNERD is privileged to have a trusted network of partners who help us deliver world-class solutions and services to our clients.</p>
           <div className="flex flex-nowrap justify-center items-center gap-20 w-full overflow-x-auto px-8 mb-4">
             {/* Partner logos - full width, horizontal, animated */}
-            <img src={amazonLogo} alt="Amazon Web Services" className="h-24 w-auto object-contain transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-partner-bounce-x" style={{ animationDelay: '0s' }} />
+            <img src={RasbyteLogo} alt="Rasbyte" className="h-24 w-auto object-contain transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-partner-bounce-x" style={{ animationDelay: '0s' }} />
             <img src={compassLogo} alt="Compass" className="h-24 w-auto object-contain transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-partner-bounce-x" style={{ animationDelay: '0.5s' }} />
-            <img src={paloAltoLogo} alt="Palo Alto Networks" className="h-24 w-auto object-contain transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-partner-bounce-x" style={{ animationDelay: '1s' }} />
+            <img src={ipv6etLogo} alt="ipv6 Ethiopia" className="h-24 w-auto object-contain transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-partner-bounce-x" style={{ animationDelay: '1s' }} />
             <img src={cdiLogo} alt="CDI" className="h-24 w-auto object-contain transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-partner-bounce-x" style={{ animationDelay: '1.5s' }} />
+            <img src={SaiaLogo} alt="Saia" className="h-24 w-auto object-contain transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-partner-bounce-x" style={{ animationDelay: '2s' }} />
           </div>
         </div>
       </section>

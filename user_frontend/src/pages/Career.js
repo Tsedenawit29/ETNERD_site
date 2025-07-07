@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 
-const NO_JOBS_MSG = `Thank you for your interest about employment opportunities at ETNERD. Currently we do not have any open positions, however if you are interested in possible future opportunities please send your CV to <a href="mailto:info@etnerd.com" target="_blank" rel="noopener noreferrer" class="font-semibold underline">info@etnerd.com</a>. We will be in touch if a role becomes available that matches your skills and experiences.`;
+const NO_JOBS_MSG = `Thank you for your interest about employment opportunities at ETNERD. Currently we do not have any open positions, however if you are interested in possible future opportunities please send your CV to <a href="mailto:contact@etnerd.com" target="_blank" rel="noopener noreferrer" class="font-semibold underline">contact@etnerd.com</a>. We will be in touch if a role becomes available that matches your skills and experiences.`;
 
 const Career = () => {
   const [showModal, setShowModal] = useState(false);

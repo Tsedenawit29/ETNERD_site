@@ -57,7 +57,6 @@ const Contact = () => {
                   <FaMapMarkerAlt className="text-dashboard-accent text-4xl drop-shadow" />
                   <div>
                     <p className="font-semibold font-display text-dashboard-primary dark:text-white">Our Office</p>
-                    <p>123 Security Lane, Bole,</p>
                     <p>Addis Ababa, Ethiopia</p>
                   </div>
                 </div>
@@ -65,14 +64,14 @@ const Contact = () => {
                   <FaEnvelope className="text-dashboard-accent text-4xl drop-shadow" />
                   <div>
                     <p className="font-semibold font-display text-dashboard-primary dark:text-white">Email Us</p>
-                    <a href="mailto:info@etnerd.com" className="text-dashboard-primary hover:text-dashboard-accent dark:text-white dark:hover:text-dashboard-accent-dark transition-colors font-sans">info@etnerd.com</a>
+                    <a href="mailto:contact@etnerd.com" className="text-dashboard-primary hover:text-dashboard-accent dark:text-white dark:hover:text-dashboard-accent-dark transition-colors font-sans">contact@etnerd.com</a>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
                   <FaPhoneAlt className="text-dashboard-accent text-4xl drop-shadow" />
                   <div>
                     <p className="font-semibold font-display text-dashboard-primary dark:text-white">Call Us</p>
-                    <a href="tel:+251912345678" className="text-dashboard-primary hover:text-dashboard-accent dark:text-white dark:hover:text-dashboard-accent-dark transition-colors font-sans">+251 912 345 678</a>
+                    <a href="tel:+251-911-677-096" className="text-dashboard-primary hover:text-dashboard-accent dark:text-white dark:hover:text-dashboard-accent-dark transition-colors font-sans">+251-911-677-096</a>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">

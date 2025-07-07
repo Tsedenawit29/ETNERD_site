@@ -10,7 +10,6 @@ const navItems = [
   { name: 'Capabilities', path: '/capabilities' },
   { name: 'News', path: '/news' },
   { name: 'Career', path: '/career' },
-  { name: 'Partner', path: '/partner' },
 ];
 
 const NavBar = ({ ThemeToggleButton }) => {
@@ -46,7 +45,14 @@ const NavBar = ({ ThemeToggleButton }) => {
         {/* Logo */}
         <Link to="/" className="flex items-center cursor-pointer select-none flex-shrink-0">
           <img src={hero} alt="ETNERD Logo" className="h-10 sm:h-12 md:h-14 w-14 object-cover rounded shadow-soft" />
-          <span className="ml-3 text-xl md:text-2xl font-display font-bold text-dashboard-accent dark:text-dashboard-accent-dark">ETNERD</span>
+          <span className="ml-3 text-xl md:text-2xl font-display font-bold">
+            <span className="text-dashboard-primary dark:text-white">E</span>
+            <span className="text-dashboard-primary dark:text-white">T</span>
+            <span className="text-dashboard-accent dark:text-dashboard-accent-dark">N</span>
+            <span className="text-dashboard-primary dark:text-white">E</span>
+            <span className="text-dashboard-primary dark:text-white">R</span>
+            <span className="text-dashboard-primary dark:text-white">D</span>
+          </span>
         </Link>
 
         {/* Mobile Toggle */}

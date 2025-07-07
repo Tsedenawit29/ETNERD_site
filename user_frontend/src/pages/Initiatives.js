@@ -231,7 +231,6 @@ export default function Initiatives() {
       const bestRef = cardRefs.current[bestIdx];
       if (bestRef && timelineRect) {
         const rect = bestRef.getBoundingClientRect();
-        const timelineTop = timelineRect.top + window.scrollY;
         setDotTop(rect.top + rect.height / 2 - timelineRect.top);
       }
     }
