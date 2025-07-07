@@ -55,8 +55,7 @@ const Footer = () => (
           Local Brains. Global Standards.
         </p>
         <p className="text-sm text-white/70 leading-relaxed">
-          Future-proof cybersecurity services with global standards and local insights.
-          Committed to securing your digital future.
+        Future-proof cybersecurity solutions, built with global standards and local insight. Securing your digital future wherever you are.
         </p>
       </div>
 

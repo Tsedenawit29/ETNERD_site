@@ -114,7 +114,7 @@ const Capabilities = () => {
           </h2>
           <div className="bg-white dark:bg-dashboard-primary-bg rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-gray-700">
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-              Our team members have proudly served as contractors for a diverse range of prestigious US Federal agencies and private firms, gaining invaluable experience in complex, high-security environments.
+              Our team members have proudly served as government contractors for a diverse range of prestigious US Federal agencies and private firms, gaining invaluable experience in complex, high-security environments.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-10 gap-x-6 justify-items-center items-center">
               {partners.map((partner, index) => (
