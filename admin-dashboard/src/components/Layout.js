@@ -175,7 +175,14 @@ const Layout = ({ children }) => {
               <div className="flex flex-col">
                 <div className="flex items-center">
                   <img src={logo} alt="SAI² Logo" className="h-8 w-auto mr-3 rounded-md" />
-                  <h1 className="text-xl font-bold text-dashboard-primary dark:text-dashboard-primary-bright">ETNERD</h1>
+                  <h1 className="text-xl font-bold">
+                    <span className="text-dashboard-primary dark:text-white">E</span>
+                    <span className="text-dashboard-primary dark:text-white">T</span>
+                    <span className="text-dashboard-accent dark:text-dashboard-accent-dark">N</span>
+                    <span className="text-dashboard-primary dark:text-white">E</span>
+                    <span className="text-dashboard-primary dark:text-white">R</span>
+                    <span className="text-dashboard-primary dark:text-white">D</span>
+                  </h1>
                 </div>
                 <p className="text-xs italic text-dashboard-primary/60 dark:text-dashboard-primary-bright/70 mt-1 text-left">Local Brains. Global Standards</p>
               </div>

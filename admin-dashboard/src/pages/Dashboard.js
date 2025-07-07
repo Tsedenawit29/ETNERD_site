@@ -160,57 +160,55 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-6 text-dashboard-primary dark:text-dashboard-primary-bright">Dashboard</h1>
-      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-black dark:via-black dark:to-black p-4">
+      <h1 className="text-3xl font-bold mb-8 text-dashboard-primary dark:text-dashboard-primary-bright text-center drop-shadow-lg">Dashboard</h1>
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 lg:gap-6 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-12">
         <StatCard
           title="Services"
           value={stats.et_services}
-          color="bg-dashboard-primary/20 dark:bg-dashboard-primary DEFAULT/20"
+          color="bg-gradient-to-br from-dashboard-primary/80 to-dashboard-accent/80 shadow-xl"
         />
         <StatCard
           title="News Articles"
           value={stats.et_news}
-          color="bg-blue-900/20"
+          color="bg-gradient-to-br from-blue-900/80 to-dashboard-accent/80 shadow-xl"
         />
         <StatCard
           title="Contact Messages"
           value={stats.et_contactMessages}
-          color="bg-blue-900/20"
+          color="bg-gradient-to-br from-blue-900/80 to-dashboard-primary/80 shadow-xl"
         />
         <StatCard
           title="Booked Services"
           value={stats.et_bookedServices}
-          color="bg-dashboard-primary/20 dark:bg-dashboard-primary DEFAULT/20"
+          color="bg-gradient-to-br from-dashboard-primary/80 to-blue-900/80 shadow-xl"
         />
         <StatCard
           title="Jobs"
           value={stats.et_jobs}
-          color="bg-dashboard-primary/20 dark:bg-dashboard-primary DEFAULT/20"
+          color="bg-gradient-to-br from-dashboard-primary/80 to-dashboard-accent/80 shadow-xl"
         />
         <StatCard
           title="Career Submissions"
           value={stats.et_career}
-          color="bg-dashboard-primary/20 dark:bg-dashboard-primary DEFAULT/20"
+          color="bg-gradient-to-br from-dashboard-primary/80 to-blue-900/80 shadow-xl"
         />
       </div>
-
       {/* Recent Actions Card */}
-      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-4 lg:p-6">
-        <h2 className="text-xl font-semibold text-dashboard-primary dark:text-dashboard-primary-bright mb-4">Recent Actions</h2>
-        <div className="space-y-3 lg:space-y-4">
+      <div className="bg-white/90 dark:bg-gray-900/90 rounded-2xl shadow-2xl p-6 max-w-4xl mx-auto">
+        <h2 className="text-2xl font-semibold text-dashboard-primary dark:text-dashboard-primary-bright mb-6 text-center">Recent Actions</h2>
+        <div className="space-y-4">
           {recentActions.map((action) => (
-            <div key={action.id} className="flex items-center space-x-3 lg:space-x-4 p-3 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
-              <div className="flex-shrink-0 w-8 h-8 lg:w-10 lg:h-10 bg-dashboard-accent/20 dark:bg-dashboard-accent-dark/30 rounded-full flex items-center justify-center text-dashboard-accent dark:text-dashboard-accent-dark">
+            <div key={action.id} className="flex items-center space-x-4 p-4 rounded-xl bg-gradient-to-r from-dashboard-primary/10 to-dashboard-accent/10 dark:from-dashboard-primary/20 dark:to-dashboard-accent/20 shadow hover:shadow-lg transition-all duration-200">
+              <div className="flex-shrink-0 w-10 h-10 bg-dashboard-accent/20 dark:bg-dashboard-accent-dark/30 rounded-full flex items-center justify-center text-dashboard-accent dark:text-dashboard-accent-dark">
                 {getActionIcon(action.type)}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-dashboard-primary dark:text-dashboard-primary-bright truncate">
+                <p className="text-base font-medium text-dashboard-primary dark:text-dashboard-primary-bright truncate">
                   {action.action}
                 </p>
-                <p className="text-xs lg:text-sm text-dashboard-primary/70 dark:text-dashboard-primary-bright/70 truncate">
+                <p className="text-xs text-dashboard-primary/70 dark:text-dashboard-primary-bright/70 truncate">
                   {action.item}
                 </p>
               </div>

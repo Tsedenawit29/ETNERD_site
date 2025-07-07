@@ -309,7 +309,7 @@ const DataTable = ({
               </p>
             </div>
             <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
-              {truncateText(item.content)}
+              {truncateText(item.content, 200)}
             </p>
             <div className="flex items-center justify-between">
               {item.link && (
@@ -427,6 +427,56 @@ const DataTable = ({
             <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
               <span className="font-medium">Created At:</span> {item.created_at ? new Date(item.created_at).toLocaleString() : '-'}
             </p>
+          </div>
+        );
+
+      case 'services':
+        return (
+          <div className="space-y-2 p-2">
+            {item.image_url && (
+              <img
+                src={item.image_url}
+                alt={item.title}
+                className="w-full h-24 object-cover rounded border border-dashboard-accent mb-1"
+              />
+            )}
+            <h3 className="text-base font-semibold text-gray-900 dark:text-dashboard-primary-bright truncate">
+              {item.title}
+            </h3>
+            <p className="text-xs text-gray-600 dark:text-dashboard-primary-bright truncate">
+              {truncateText(item.content, 120)}
+            </p>
+            <button
+              className="mt-1 px-3 py-1 rounded bg-dashboard-accent text-white text-xs font-semibold hover:bg-dashboard-primary transition-all duration-200"
+              onClick={() => setDetailsModal({ isOpen: true, item })}
+            >
+              Details
+            </button>
+          </div>
+        );
+
+      case 'news':
+        return (
+          <div className="space-y-2 p-2">
+            {item.image_url && (
+              <img
+                src={item.image_url}
+                alt={item.headline}
+                className="w-full h-24 object-cover rounded border border-dashboard-accent mb-1"
+              />
+            )}
+            <h3 className="text-base font-semibold text-gray-900 dark:text-dashboard-primary-bright truncate">
+              {item.headline}
+            </h3>
+            <p className="text-xs text-gray-600 dark:text-dashboard-primary-bright truncate">
+              {truncateText(item.content, 120)}
+            </p>
+            <button
+              className="mt-1 px-3 py-1 rounded bg-dashboard-accent text-white text-xs font-semibold hover:bg-dashboard-primary transition-all duration-200"
+              onClick={() => setDetailsModal({ isOpen: true, item })}
+            >
+              Details
+            </button>
           </div>
         );
 
