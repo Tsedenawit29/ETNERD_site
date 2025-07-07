@@ -38,8 +38,10 @@
 }
 
 @keyframes hero-zoom {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  20% { transform: scale(1.12) rotate(-1deg); }
+  50% { transform: scale(1.18) rotate(1.5deg); }
+  80% { transform: scale(1.12) rotate(-1deg); }
 }
 
 @keyframes hero-lightup {
@@ -62,7 +64,7 @@
 }
 
 .hero-zoom {
-  animation: hero-zoom 6s ease-in-out infinite;
+  animation: hero-zoom 4.5s cubic-bezier(0.77,0,0.18,1) infinite;
 }
 
 .hero-lightup {

@@ -114,7 +114,7 @@ const Capabilities = () => {
           </h2>
           <div className="bg-white dark:bg-dashboard-primary-bg rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-gray-700">
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-              Our team members have proudly served as contractors for a diverse range of prestigious US Federal agencies and private firms, gaining invaluable experience in complex, high-security environments.
+              Our team members have proudly served as government contractors for a diverse range of prestigious US Federal agencies and private firms, gaining invaluable experience in complex, high-security environments.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-10 gap-x-6 justify-items-center items-center">
               {partners.map((partner, index) => (
@@ -136,17 +136,17 @@ const Capabilities = () => {
       </section>
 
       {/* --- Call to Action Section --- */}
-      <section className="relative z-10 py-20 px-4 md:px-8 text-white text-center" style={{ background: 'linear-gradient(135deg, #2563eb 0%, #ff9800 100%)' }}>
+      <section className="relative z-10 py-20 px-4 md:px-8 text-white text-center shadow-2xl shadow-orange-200 dark:shadow-orange-500 dark:bg-gray-900">
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="font-display text-3xl md:text-4xl font-bold mb-6 text-black dark:text-white">
             Ready to Secure Your Digital Future?
           </h2>
-          <p className="text-lg md:text-xl mb-8 text-white/90">
+          <p className="text-lg md:text-xl mb-8 text-black dark:text-white/90">
             Partner with ETNERD for unparalleled cybersecurity, robust IT infrastructure, and seamless digital transformation.
           </p>
           <a
             href="/contact"
-            className="inline-block px-10 py-4 bg-white text-dashboard-accent font-semibold rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            className="inline-block px-10 py-4 bg-dashboard-accent text-white font-semibold rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
           >
             Get a Free Consultation
           </a>

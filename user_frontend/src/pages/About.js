@@ -196,8 +196,8 @@ const About = () => {
     </section>
 
     {/* Call to Action Section */}
-    <section className="py-20 px-4 bg-gradient-to-r from-dashboard-primary via-sai-teal-500 to-dashboard-accent">
-      <div className="max-w-4xl mx-auto text-center text-white">
+    <section className="py-20 px-4 bg-white shadow-2xl shadow-orange-900 dark:shadow-orange-500 dark:bg-gray-900">
+      <div className="max-w-4xl mx-auto text-center text-black dark:text-white">
         <h2 className="text-4xl font-bold mb-6">Ready to Transform Your Business?</h2>
         <p className="text-xl mb-8 opacity-90">
           Let's discuss how ETNERD Security Solutions can help you achieve your goals
@@ -211,7 +211,7 @@ const About = () => {
             </Link>
             <Link
               to="/services"
-              className="px-6 py-3 rounded-full border-2 mx-4 border-white text-white bg-transparent font-semibold shadow-lg shadow-black/30 hover:bg-dashboard-accent hover:text-white transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl"
+              className="px-6 py-3 rounded-full border-2 mx-4 border-black text-black bg-transparent font-semibold shadow-lg shadow-black/30 hover:bg-dashboard-accent hover:text-white transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl dark:border-white dark:text-white dark:bg-transparent"
             >
               Contact Us
             </Link>

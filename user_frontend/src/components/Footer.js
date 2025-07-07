@@ -55,8 +55,7 @@ const Footer = () => (
           Local Brains. Global Standards.
         </p>
         <p className="text-sm text-white/70 leading-relaxed">
-          Future-proof cybersecurity services with global standards and local insights.
-          Committed to securing your digital future.
+        Future-proof cybersecurity solutions, built with global standards and local insight. Securing your digital future wherever you are.
         </p>
       </div>
 
@@ -116,7 +115,7 @@ const Footer = () => (
           </p>
           <p className="flex items-center gap-2">
             <FaPhoneAlt className="text-dashboard-accent text-lg" />
-            Phone: <a href="tel:+251912345678" className="hover:text-dashboard-accent transition-colors">+251 912 345 678</a>
+            Phone: <a href="tel:+251-911-677-096" className="hover:text-dashboard-accent transition-colors">+251-911-677-096</a>
           </p>
         </address>
 

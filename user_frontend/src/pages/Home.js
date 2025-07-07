@@ -107,7 +107,8 @@ const Home = () => {
         <img
           src={etnerdImage}
           alt="ETNERD Hero Background - Ethiopian Map"
-          className="absolute inset-0 w-full h-full object-cover z-0 hero-zoom hero-lightup hero-glow hero-frontback"
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          style={{ animation: 'hero-zoom 4.5s cubic-bezier(0.77,0,0.18,1) infinite', willChange: 'transform' }}
         />
         {/* Dark shadow overlay that gradually lightens */}
         <div className="absolute inset-0 z-10 bg-gradient-to-br from-black/80 via-black/60 to-black/40 dark:from-black/90 dark:via-black/70 dark:to-black/50 animate-shadow-lift" />
