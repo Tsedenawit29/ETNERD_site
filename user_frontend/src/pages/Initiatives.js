@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import saiaImg from '../asset/saia.jpg';
 import ipv6Img from '../asset/ipv6.png';
 import wicImg from '../asset/wic.png';
@@ -169,17 +170,16 @@ function InitiativeCard({ item, align, index }) {
   // Card float/tilt animation
   const floatClass = index % 2 === 0 ? 'animate-float-slow rotate-2' : 'animate-float-medium -rotate-2';
   return (
-    <div className="relative flex flex-col w-full max-w-2xl min-w-0 mx-auto">
+    <div className="relative flex flex-col w-full max-w-4xl min-w-0 mx-auto">
       {/* Animated blob background */}
       <AnimatedBlob color={blobColor} className={align === 'left' ? 'left-0 -top-8' : 'right-0 -top-8'} />
       {/* Card */}
       <div
-        className={`relative z-10 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-8 flex flex-col w-full border-t-4 border-dashboard-accent ${floatClass} transition-transform duration-500`}
-        style={{ minHeight: '180px' }}
+        className={`relative z-10 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl px-14 py-5 flex flex-col w-full border-t-4 border-dashboard-accent ${floatClass} transition-transform duration-500 md:max-w-4xl md:min-h-[120px]`}
       >
         {/* Top Row: Image + Title/Icon */}
-        <div className="flex flex-col md:flex-row w-full items-center md:items-start">
-          <div className="flex-shrink-0 flex items-center justify-center md:mr-6 mb-4 md:mb-0">
+        <div className="flex flex-col md:flex-row w-full items-center md:items-center">
+          <div className="flex-shrink-0 flex items-center justify-center md:mr-10 mb-4 md:mb-0">
             <img
               src={item.img}
               alt={item.imgAlt}
@@ -194,7 +194,6 @@ function InitiativeCard({ item, align, index }) {
                 {item.title}
               </h3>
             </div>
-            <span className="text-xs text-gray-400 mb-2">{item.attribution}</span>
           </div>
         </div>
         {/* Description: full width below image+title */}
@@ -208,11 +207,12 @@ function InitiativeCard({ item, align, index }) {
 
 export default function Initiatives() {
   const cardRefs = useRef([]);
+  const timelineRef = useRef();
   const [dotTop, setDotTop] = useState(0);
 
   useEffect(() => {
     function handleScroll() {
-      // Find the card whose center is closest to the center of the viewport
+      const timelineRect = timelineRef.current?.getBoundingClientRect();
       const viewportCenter = window.innerHeight / 2;
       let minDist = Infinity;
       let bestIdx = 0;
@@ -227,11 +227,12 @@ export default function Initiatives() {
           }
         }
       });
-      // Set the dot position to the center of the best card
+      // Set the dot position to the center of the best card, relative to the timeline section
       const bestRef = cardRefs.current[bestIdx];
-      if (bestRef) {
+      if (bestRef && timelineRect) {
         const rect = bestRef.getBoundingClientRect();
-        setDotTop(window.scrollY + rect.top + rect.height / 2);
+        const timelineTop = timelineRect.top + window.scrollY;
+        setDotTop(rect.top + rect.height / 2 - timelineRect.top);
       }
     }
     window.addEventListener('scroll', handleScroll);
@@ -288,13 +289,13 @@ export default function Initiatives() {
 
         {/* Timeline/Alternating Initiatives Section */}
         <section className="py-16 px-4">
-          <div className="max-w-4xl mx-auto relative">
+          <div className="max-w-4xl mx-auto relative" ref={timelineRef}>
             {/* Centered vertical line for timeline */}
             <div className="hidden md:block absolute left-1/2 top-0 h-full w-1 bg-dashboard-accent/40 z-0" style={{transform: 'translateX(-50%)'}}></div>
             {/* Single floating dot, moves with scroll */}
             <div
               className="hidden md:block absolute left-1/2 z-20"
-              style={{ transform: 'translateX(-50%)', top: dotTop ? `${dotTop - 80}px` : '0px', transition: 'top 0.3s cubic-bezier(0.4,0,0.2,1)' }}
+              style={{ transform: 'translateX(-50%)', top: dotTop ? `${dotTop - 16}px` : '0px', transition: 'top 0.3s cubic-bezier(0.4,0,0.2,1)' }}
             >
               <div className="w-8 h-8 rounded-full bg-dashboard-accent border-4 border-white dark:border-gray-900 shadow-glow floating-dot"></div>
             </div>
@@ -333,6 +334,30 @@ export default function Initiatives() {
             </div>
           </div>
         </section>
+
+         {/* Call to Action Section */}
+    <section className="py-20 px-4 bg-white dark:bg-gray-900">
+      <div className="max-w-4xl mx-auto text-center text-black dark:text-white">
+        <h2 className="text-4xl font-bold mb-6">Ready to Transform Your Business?</h2>
+        <p className="text-xl mb-8 opacity-90">
+          Let's discuss how ETNERD Security Solutions can help you achieve your goals
+        </p>
+        <div className="flex justify-center">
+          <Link
+            to="/contact"
+            className="px-6 py-3 rounded-full bg-dashboard-accent text-white font-semibold shadow-lg shadow-black/30 hover:bg-gray-100 transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl"
+          >
+            Explore our Services
+          </Link>
+          <Link
+            to="/services"
+            className="px-6 py-3 rounded-full border-2 mx-4 border-black dark:border-white text-black dark:text-white bg-transparent font-semibold shadow-lg shadow-black/30 hover:bg-white hover:text-dashboard-accent transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl"
+          >
+            Contact Us
+          </Link>
+        </div>
+      </div>
+    </section>
       </div>
     </>
   );
