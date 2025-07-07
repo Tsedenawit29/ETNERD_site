@@ -14,6 +14,9 @@ import Partner from './pages/Partner';
 import Contact from './pages/Contact';
 import ServiceDetail from './pages/ServiceDetail';
 import CVSubmit from './pages/CVSubmit';
+import FAQs from './pages/FAQs';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 function App() {
   return (
@@ -34,6 +37,9 @@ function App() {
               <Route path="/partner" element={<Partner />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/submit-cv" element={<CVSubmit />} />
+              <Route path="/faqs" element={<FAQs />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsOfService />} />
             </Routes>
           </main>
           <Footer />

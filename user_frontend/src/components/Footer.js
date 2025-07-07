@@ -116,7 +116,7 @@ const Footer = () => (
           </p>
           <p className="flex items-center gap-2">
             <FaPhoneAlt className="text-dashboard-accent text-lg" />
-            Phone: <a href="tel:+251912345678" className="hover:text-dashboard-accent transition-colors">+251 912 345 678</a>
+            Phone: <a href="tel:+251-911-677-096" className="hover:text-dashboard-accent transition-colors">+251-911-677-096</a>
           </p>
         </address>
 
