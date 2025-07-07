@@ -130,13 +130,13 @@ const Career = () => {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] bg-white dark:bg-black pt-28">
         <div className="max-w-2xl bg-white/80 dark:bg-slate-800/80 p-8 rounded-xl shadow mb-8">
-          <h2 className="font-display text-3xl font-bold text-dashboard-accent dark:text-dashboard-accent-dark mb-4">Career</h2>
+    <h2 className="font-display text-3xl font-bold text-dashboard-accent dark:text-dashboard-accent-dark mb-4">Career</h2>
           <p className="text-dashboard-primary dark:text-dashboard-primary-bright mb-2 whitespace-pre-line" dangerouslySetInnerHTML={{ __html: NO_JOBS_MSG }} />
         </div>
         <div className="flex gap-4">
           <button
             className="px-6 py-2 rounded-lg bg-dashboard-accent text-white font-semibold hover:bg-dashboard-accent-dark transition"
-            onClick={() => setShowModal(true)}
+            onClick={() => navigate('/submit-cv')}
           >
             Send your CV
           </button>
@@ -147,114 +147,6 @@ const Career = () => {
             Learn About ETNERD
           </button>
         </div>
-        <Modal open={showModal} onClose={() => setShowModal(false)}>
-          <h3 className="text-xl font-bold mb-4">Send Your CV</h3>
-          {success ? (
-            <div className="text-green-600 font-semibold">Thank you! Your CV has been submitted.</div>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4" autoComplete="off">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold mb-1">Full Name <span className="text-red-500">*</span></label>
-                  <input
-                    type="text"
-                    name="full_name"
-                    placeholder="John Doe"
-                    value={form.full_name}
-                    onChange={handleChange}
-                    className="border rounded px-3 py-2 w-full"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold mb-1">Email Address <span className="text-red-500">*</span></label>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="john@example.com"
-                    value={form.email}
-                    onChange={handleChange}
-                    className="border rounded px-3 py-2 w-full"
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-semibold mb-1">Phone Number <span className="text-gray-400 text-xs">(Optional)</span></label>
-                <input
-                  type="text"
-                  name="phone"
-                  placeholder="(123) 456-7890"
-                  value={form.phone}
-                  onChange={handleChange}
-                  className="border rounded px-3 py-2 w-full"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold mb-1">Subject <span className="text-red-500">*</span></label>
-                <select
-                  name="subject"
-                  value={form.subject}
-                  onChange={handleChange}
-                  className="border rounded px-3 py-2 w-full"
-                  required
-                >
-                  <option value="">Select a topic</option>
-                  <option value="Job Application">Job Application</option>
-                  <option value="Internship">Internship</option>
-                  <option value="General Inquiry">General Inquiry</option>
-                </select>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold mb-1">Message <span className="text-red-500">*</span></label>
-                  <textarea
-                    name="message"
-                    placeholder="How can we help you?"
-                    value={form.message}
-                    onChange={handleChange}
-                    className="border rounded px-3 py-2 w-full"
-                    rows={4}
-                    required
-                  />
-                </div>
-                <div
-                  className={`border-2 border-dashed rounded-lg px-4 py-6 text-center cursor-pointer transition ${dragActive ? 'border-dashboard-accent bg-dashboard-accent/10' : 'border-gray-300 bg-gray-50 dark:bg-slate-800'}`}
-                  onDragEnter={handleDrag}
-                  onDragLeave={handleDrag}
-                  onDragOver={handleDrag}
-                  onDrop={handleDrop}
-                  onClick={() => fileInputRef.current && fileInputRef.current.click()}
-                >
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    name="file"
-                    accept="application/pdf"
-                    onChange={handleFileChange}
-                    className="hidden"
-                  />
-                  <div className="flex flex-col items-center justify-center">
-                    <svg className="w-8 h-8 mb-2 text-dashboard-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16v-4a4 4 0 014-4 4 4 0 014 4v4m-4 4v-4m0 0V4m0 12l-4-4m4 4l4-4" />
-                    </svg>
-                    <span className="font-semibold">Drag & drop your PDF here, or <span className="underline text-dashboard-accent">choose file</span></span>
-                    <span className="text-xs text-gray-500 mt-1">PDF only. Max 5MB.</span>
-                    {form.file && <span className="block mt-2 text-green-600 font-semibold">{form.file.name}</span>}
-                  </div>
-                </div>
-              </div>
-              {error && <div className="text-red-600 text-sm">{error}</div>}
-              <button
-                type="submit"
-                className="bg-dashboard-accent text-white rounded px-4 py-2 font-semibold hover:bg-dashboard-accent-dark transition disabled:opacity-60"
-                disabled={loading}
-              >
-                {loading ? 'Submitting...' : 'Submit'}
-              </button>
-            </form>
-          )}
-        </Modal>
         {/* 3 Info Cards Section */}
         <div className="w-full flex flex-col items-center mt-16 mb-2">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
@@ -314,7 +206,7 @@ const Career = () => {
         <div className="flex gap-4 mb-8">
           <button
             className="px-6 py-2 rounded-lg bg-dashboard-accent text-white font-semibold hover:bg-dashboard-accent-dark transition"
-            onClick={() => setShowModal(true)}
+            onClick={() => navigate('/submit-cv')}
           >
             Send your CV
           </button>
@@ -325,114 +217,6 @@ const Career = () => {
             Learn About ETNERD
           </button>
         </div>
-        <Modal open={showModal} onClose={() => setShowModal(false)}>
-          <h3 className="text-xl font-bold mb-4">Send Your CV</h3>
-          {success ? (
-            <div className="text-green-600 font-semibold">Thank you! Your CV has been submitted.</div>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4" autoComplete="off">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold mb-1">Full Name <span className="text-red-500">*</span></label>
-                  <input
-                    type="text"
-                    name="full_name"
-                    placeholder="John Doe"
-                    value={form.full_name}
-                    onChange={handleChange}
-                    className="border rounded px-3 py-2 w-full"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold mb-1">Email Address <span className="text-red-500">*</span></label>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="john@example.com"
-                    value={form.email}
-                    onChange={handleChange}
-                    className="border rounded px-3 py-2 w-full"
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-semibold mb-1">Phone Number <span className="text-gray-400 text-xs">(Optional)</span></label>
-                <input
-                  type="text"
-                  name="phone"
-                  placeholder="(123) 456-7890"
-                  value={form.phone}
-                  onChange={handleChange}
-                  className="border rounded px-3 py-2 w-full"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold mb-1">Subject <span className="text-red-500">*</span></label>
-                <select
-                  name="subject"
-                  value={form.subject}
-                  onChange={handleChange}
-                  className="border rounded px-3 py-2 w-full"
-                  required
-                >
-                  <option value="">Select a topic</option>
-                  <option value="Job Application">Job Application</option>
-                  <option value="Internship">Internship</option>
-                  <option value="General Inquiry">General Inquiry</option>
-                </select>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold mb-1">Message <span className="text-red-500">*</span></label>
-                  <textarea
-                    name="message"
-                    placeholder="How can we help you?"
-                    value={form.message}
-                    onChange={handleChange}
-                    className="border rounded px-3 py-2 w-full"
-                    rows={4}
-                    required
-                  />
-                </div>
-                <div
-                  className={`border-2 border-dashed rounded-lg px-4 py-6 text-center cursor-pointer transition ${dragActive ? 'border-dashboard-accent bg-dashboard-accent/10' : 'border-gray-300 bg-gray-50 dark:bg-slate-800'}`}
-                  onDragEnter={handleDrag}
-                  onDragLeave={handleDrag}
-                  onDragOver={handleDrag}
-                  onDrop={handleDrop}
-                  onClick={() => fileInputRef.current && fileInputRef.current.click()}
-                >
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    name="file"
-                    accept="application/pdf"
-                    onChange={handleFileChange}
-                    className="hidden"
-                  />
-                  <div className="flex flex-col items-center justify-center">
-                    <svg className="w-8 h-8 mb-2 text-dashboard-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16v-4a4 4 0 014-4 4 4 0 014 4v4m-4 4v-4m0 0V4m0 12l-4-4m4 4l4-4" />
-                    </svg>
-                    <span className="font-semibold">Drag & drop your PDF here, or <span className="underline text-dashboard-accent">choose file</span></span>
-                    <span className="text-xs text-gray-500 mt-1">PDF only. Max 5MB.</span>
-                    {form.file && <span className="block mt-2 text-green-600 font-semibold">{form.file.name}</span>}
-                  </div>
-                </div>
-              </div>
-              {error && <div className="text-red-600 text-sm">{error}</div>}
-              <button
-                type="submit"
-                className="bg-dashboard-accent text-white rounded px-4 py-2 font-semibold hover:bg-dashboard-accent-dark transition disabled:opacity-60"
-                disabled={loading}
-              >
-                {loading ? 'Submitting...' : 'Submit'}
-              </button>
-            </form>
-          )}
-        </Modal>
         {/* 3 Info Cards Section */}
         <div className="w-full flex flex-col items-center mt-16 mb-2">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
