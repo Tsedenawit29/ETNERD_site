@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient'; // Ensure supabaseClient is correctly configured
 import ServiceIcon from '../components/ServiceIcon'; // Assuming ServiceIcon component exists
 import etnerdImage from '../asset/hero2.jpg'; // Your background hero image
-import amazonLogo from '../asset/amazon.png';
+import RasbyteLogo from '../asset/rasbytepartner.png';
 import compassLogo from '../asset/compass.png';
-import paloAltoLogo from '../asset/palloalto.png';
+import ipv6etLogo from '../asset/ipv6.png';
 import cdiLogo from '../asset/cdi.png';
+import SaiaLogo from '../asset/saia.jpg';
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -414,10 +415,11 @@ const Home = () => {
           <p className="text-base md:text-lg text-dashboard-primary dark:text-white mb-8 text-center max-w-2xl">ETNERD is privileged to have a trusted network of partners who help us deliver world-class solutions and services to our clients.</p>
           <div className="flex flex-nowrap justify-center items-center gap-20 w-full overflow-x-auto px-8 mb-4">
             {/* Partner logos - full width, horizontal, animated */}
-            <img src={amazonLogo} alt="Amazon Web Services" className="h-24 w-auto object-contain transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-partner-bounce-x" style={{ animationDelay: '0s' }} />
+            <img src={RasbyteLogo} alt="Rasbyte" className="h-24 w-auto object-contain transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-partner-bounce-x" style={{ animationDelay: '0s' }} />
             <img src={compassLogo} alt="Compass" className="h-24 w-auto object-contain transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-partner-bounce-x" style={{ animationDelay: '0.5s' }} />
-            <img src={paloAltoLogo} alt="Palo Alto Networks" className="h-24 w-auto object-contain transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-partner-bounce-x" style={{ animationDelay: '1s' }} />
+            <img src={ipv6etLogo} alt="ipv6 Ethiopia" className="h-24 w-auto object-contain transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-partner-bounce-x" style={{ animationDelay: '1s' }} />
             <img src={cdiLogo} alt="CDI" className="h-24 w-auto object-contain transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-partner-bounce-x" style={{ animationDelay: '1.5s' }} />
+            <img src={SaiaLogo} alt="Saia" className="h-24 w-auto object-contain transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-partner-bounce-x" style={{ animationDelay: '2s' }} />
           </div>
         </div>
       </section>
