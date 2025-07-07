@@ -11,7 +11,6 @@ const navItems = [
   { name: 'Capabilities', path: '/capabilities' },
   { name: 'News & Insights', path: '/news' },
   { name: 'Careers', path: '/career' },
-  { name: 'Partnerships', path: '/partner' },
   { name: 'Contact Us', path: '/contact' },
 ];
 
@@ -39,8 +38,13 @@ const Footer = () => (
           )}
           {/* ETNERD Text */}
           <div>
-            <h2 className="font-display text-3xl font-extrabold text-dashboard-accent leading-tight">
-              ETNERD
+            <h2 className="font-display text-3xl font-extrabold leading-tight">
+              <span className="text-white/80 dark:text-white">E</span>
+              <span className="text-white/80 dark:text-white">T</span>
+              <span className="text-dashboard-accent dark:text-dashboard-accent-dark">N</span>
+              <span className="text-white/80 dark:text-white">E</span>
+              <span className="text-white/80 dark:text-white">R</span>
+              <span className="text-white/80 dark:text-white">D</span>
             </h2>
             <p className="text-white text-md font-medium tracking-wide">Security Solutions</p>
           </div>
@@ -104,11 +108,11 @@ const Footer = () => (
           <span className="block w-10 h-0.5 bg-dashboard-accent mt-2"></span>
         </h3>
         <address className="not-italic text-sm text-white/70 space-y-3 mb-8">
-          <p>123 Security Lane,</p>
-          <p>Bole, Addis Ababa, Ethiopia</p>
+          
+          <p>Addis Ababa, Ethiopia</p>
           <p className="flex items-center gap-2">
             <FaEnvelope className="text-dashboard-accent text-lg" />
-            Email: <a href="mailto:info@etnerd.com" className="hover:text-dashboard-accent transition-colors">info@etnerd.com</a>
+            Email: <a href="mailto:contact@etnerd.com" className="hover:text-dashboard-accent transition-colors">contact@etnerd.com</a>
           </p>
           <p className="flex items-center gap-2">
             <FaPhoneAlt className="text-dashboard-accent text-lg" />

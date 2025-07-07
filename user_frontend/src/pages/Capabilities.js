@@ -24,7 +24,7 @@ const Capabilities = () => {
             Our <span className="text-dashboard-accent">Expertise</span> & Proven Track Record
           </h1>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto animate-fade-in delay-200">
-            At ETNERD, we combine **deep technical capabilities** with extensive experience serving high-stakes environments, ensuring robust and reliable solutions for your most critical needs.
+          At ETNERD, we blend deep technical expertise with extensive experience in high-stakes environments to deliver robust, reliable solutions for your most critical needs
           </p>
         </div>
       </section>
@@ -114,7 +114,7 @@ const Capabilities = () => {
           </h2>
           <div className="bg-white dark:bg-dashboard-primary-bg rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-gray-700">
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-              Our team members have proudly served as contractors for a diverse range of prestigious **US Federal agencies** and **private firms**, gaining invaluable experience in complex, high-security environments.
+              Our team members have proudly served as contractors for a diverse range of prestigious US Federal agencies and private firms, gaining invaluable experience in complex, high-security environments.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-10 gap-x-6 justify-items-center items-center">
               {partners.map((partner, index) => (
@@ -136,7 +136,7 @@ const Capabilities = () => {
       </section>
 
       {/* --- Call to Action Section --- */}
-      <section className="relative z-10 py-20 px-4 md:px-8 bg-dashboard-primary text-white text-center">
+      <section className="relative z-10 py-20 px-4 md:px-8 text-white text-center" style={{ background: 'linear-gradient(135deg, #2563eb 0%, #ff9800 100%)' }}>
         <div className="max-w-4xl mx-auto">
           <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">
             Ready to Secure Your Digital Future?
@@ -157,6 +157,7 @@ const Capabilities = () => {
       <div className="absolute top-0 left-0 w-96 h-96 bg-dashboard-accent/10 rounded-full blur-3xl opacity-30 animate-blob" />
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-dashboard-primary/10 rounded-full blur-3xl opacity-30 animate-blob2 delay-500" />
       <div className="absolute top-1/4 left-1/2 w-64 h-64 bg-dashboard-accent/5 rounded-full blur-3xl opacity-20 animate-blob3 delay-1000" />
+      <div style={{ marginBottom: '3rem' }} />
     </div>
   );
 };
