@@ -16,6 +16,15 @@ const initiatives = [
     description: (
       <>
         Through Ethiopian Women in Cybersecurity (ETWiC) initiative, we champion gender inclusion in cybersecurity by fostering leadership, mentorship, and opportunities for women to thrive in technical and policy roles.
+        <br />
+        <a
+          href="https://etwic.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-2 text-dashboard-accent underline hover:text-dashboard-primary font-semibold"
+        >
+          Learn more
+        </a>
       </>
     ),
   },
@@ -27,6 +36,15 @@ const initiatives = [
     description: (
       <>
         IPv6 Ethiopia is an initiative aimed at raising awareness about IPv6, its importance, and its adoption across the country. As the foundation of the future internet, IPv6 ensures scalability, security, and connectivity for the next generation of digital services and innovation.
+        <br />
+        <a
+          href="https://ipv6et.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-2 text-dashboard-accent underline hover:text-dashboard-primary font-semibold"
+        >
+          Learn more
+        </a>
       </>
     ),
   },
@@ -38,6 +56,15 @@ const initiatives = [
     description: (
       <>
         Secure AI in Africa (SAI²) is an initiative dedicated to advancing AI security across the continent by promoting awareness, delivering targeted training, and fostering local capacity. This initiative also focuses on securing emerging technologies.
+        <br />
+        <a
+          href="https://secureaiafrica.africa/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-2 text-dashboard-accent underline hover:text-dashboard-primary font-semibold"
+        >
+          Learn more
+        </a>
       </>
     ),
   },
@@ -284,7 +311,7 @@ export default function Initiatives() {
               </div>
             </div>
           </div>
-        </section>
+  </section>
 
         {/* Timeline/Alternating Initiatives Section */}
         <section className="py-16 px-4">

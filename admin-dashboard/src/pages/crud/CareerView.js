@@ -4,7 +4,15 @@ import DataTable from '../../components/DataTable';
 const columns = [
   { Header: 'ID', accessor: 'id' },
   { Header: 'Full Name', accessor: 'full_name' },
-  { Header: 'Email', accessor: 'email' },
+  {
+    key: 'email',
+    label: 'Email',
+    render: (row) => (
+      <a href={`mailto:${row.email}`} className="text-dashboard-accent underline hover:text-dashboard-primary">
+        {row.email}
+      </a>
+    ),
+  },
   { Header: 'Phone', accessor: 'phone' },
   { Header: 'Subject', accessor: 'subject' },
   { Header: 'Message', accessor: 'meassage' },

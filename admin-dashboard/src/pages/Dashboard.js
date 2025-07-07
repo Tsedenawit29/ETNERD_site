@@ -6,11 +6,12 @@ import CareerView from './crud/CareerView';
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
-    et_ourWork: 0,
     et_services: 0,
-    et_events: 0,
     et_news: 0,
     et_contactMessages: 0,
+    et_bookedServices: 0,
+    et_jobs: 0,
+    et_career: 0,
   });
 
   const [recentActions, setRecentActions] = useState([
@@ -59,32 +60,36 @@ const Dashboard = () => {
         console.log('Fetching dashboard stats...');
         
         const [
-          { count: et_ourWork, error: ourWorkError },
           { count: et_services, error: servicesError },
-          { count: et_events, error: eventsError },
           { count: et_news, error: newsError },
           { count: et_contactMessages, error: contactError },
+          { count: et_bookedServices, error: bookedServicesError },
+          { count: et_jobs, error: jobsError },
+          { count: et_career, error: careerError },
         ] = await Promise.all([
-          supabase.from('et_our_work').select('*', { count: 'exact', head: true }),
           supabase.from('et_services').select('*', { count: 'exact', head: true }),
-          supabase.from('et_events').select('*', { count: 'exact', head: true }),
           supabase.from('et_news').select('*', { count: 'exact', head: true }),
           supabase.from('et_contact_messages').select('*', { count: 'exact', head: true }),
+          supabase.from('et_booked_services').select('*', { count: 'exact', head: true }),
+          supabase.from('et_jobs').select('*', { count: 'exact', head: true }),
+          supabase.from('et_career').select('*', { count: 'exact', head: true }),
         ]);
 
         // Log any errors
-        if (ourWorkError) console.error('Our Work Error:', ourWorkError);
         if (servicesError) console.error('Services Error:', servicesError);
-        if (eventsError) console.error('Events Error:', eventsError);
         if (newsError) console.error('News Error:', newsError);
         if (contactError) console.error('Contact Error:', contactError);
+        if (bookedServicesError) console.error('Booked Services Error:', bookedServicesError);
+        if (jobsError) console.error('Jobs Error:', jobsError);
+        if (careerError) console.error('Career Error:', careerError);
 
         const newStats = {
-          et_ourWork: et_ourWork || 0,
           et_services: et_services || 0,
-          et_events: et_events || 0,
           et_news: et_news || 0,
           et_contactMessages: et_contactMessages || 0,
+          et_bookedServices: et_bookedServices || 0,
+          et_jobs: et_jobs || 0,
+          et_career: et_career || 0,
         };
 
         console.log('Dashboard stats:', newStats);
@@ -93,11 +98,12 @@ const Dashboard = () => {
         console.error('Error fetching stats:', error);
         // Set default values if there's an error
         setStats({
-          et_ourWork: 0,
           et_services: 0,
-          et_events: 0,
           et_news: 0,
           et_contactMessages: 0,
+          et_bookedServices: 0,
+          et_jobs: 0,
+          et_career: 0,
         });
       }
     };
@@ -158,21 +164,11 @@ const Dashboard = () => {
       <h1 className="text-2xl font-bold mb-6 text-dashboard-primary dark:text-dashboard-primary-bright">Dashboard</h1>
       
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 lg:gap-6 mb-8">
-        <StatCard
-          title="Our Work Items"
-          value={stats.et_ourWork}
-          color="bg-dashboard-primary/20 dark:bg-dashboard-primary DEFAULT/20"
-        />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 lg:gap-6 mb-8">
         <StatCard
           title="Services"
           value={stats.et_services}
           color="bg-dashboard-primary/20 dark:bg-dashboard-primary DEFAULT/20"
-        />
-        <StatCard
-          title="Events"
-          value={stats.et_events}
-          color="bg-blue-900/20"
         />
         <StatCard
           title="News Articles"
@@ -183,6 +179,21 @@ const Dashboard = () => {
           title="Contact Messages"
           value={stats.et_contactMessages}
           color="bg-blue-900/20"
+        />
+        <StatCard
+          title="Booked Services"
+          value={stats.et_bookedServices}
+          color="bg-dashboard-primary/20 dark:bg-dashboard-primary DEFAULT/20"
+        />
+        <StatCard
+          title="Jobs"
+          value={stats.et_jobs}
+          color="bg-dashboard-primary/20 dark:bg-dashboard-primary DEFAULT/20"
+        />
+        <StatCard
+          title="Career Submissions"
+          value={stats.et_career}
+          color="bg-dashboard-primary/20 dark:bg-dashboard-primary DEFAULT/20"
         />
       </div>
 

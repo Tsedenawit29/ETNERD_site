@@ -10,10 +10,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
-  const [showPostLoginModal, setShowPostLoginModal] = useState(false);
-  const [showForgotPassword, setShowForgotPassword] = useState(false);
-  const [forgotEmail, setForgotEmail] = useState('');
-  const [forgotStatus, setForgotStatus] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [changeError, setChangeError] = useState('');
@@ -28,7 +25,7 @@ const Login = () => {
       setError('');
       setLoading(true);
       await signIn(email, password);
-      setShowPostLoginModal(true); // Show modal after login
+      navigate('/dashboard');
     } catch (error) {
       setError('Failed to sign in. Please check your credentials.');
       console.error('Login error:', error);
@@ -39,242 +36,148 @@ const Login = () => {
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
-    setChangeError('');
     setChangeSuccess('');
+    setChangeError('');
     if (newPassword !== confirmPassword) {
       setChangeError('New passwords do not match.');
       return;
     }
     setChanging(true);
     try {
+      // Authenticate with email and old password
+      await signIn(email, oldPassword);
+      // If successful, update password
       const { error } = await supabase.auth.updateUser({ password: newPassword });
       if (error) {
         setChangeError(error.message || 'Failed to change password.');
       } else {
-        setChangeSuccess('Password changed successfully!');
+        setChangeSuccess('Password changed successfully! You can now log in.');
+        setOldPassword('');
         setNewPassword('');
         setConfirmPassword('');
-        setTimeout(() => {
-          setShowChangePassword(false);
-          setShowPostLoginModal(false);
-          navigate('/dashboard');
-        }, 1500);
       }
     } catch (err) {
-      setChangeError('An unexpected error occurred.');
+      setChangeError('Old password is incorrect or session expired.');
     } finally {
       setChanging(false);
     }
   };
 
-  const handleForgotPassword = async (e) => {
-    e.preventDefault();
-    setForgotStatus('');
-    try {
-      const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail);
-      if (error) {
-        setForgotStatus('Error: ' + (error.message || 'Could not send reset email.'));
-      } else {
-        setForgotStatus('Password reset email sent! Check your inbox.');
-      }
-    } catch (err) {
-      setForgotStatus('An unexpected error occurred.');
-    }
-  };
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-black">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-dashboard-primary-bright">
-            Admin Dashboard
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600 dark:text-dashboard-primary-bright">
-            Sign in to your account
-          </p>
-        </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded dark:bg-red-900/20 dark:border-red-800 dark:text-red-400">
-              {error}
-            </div>
-          )}
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 dark:text-white rounded-t-md focus:outline-none focus:ring-dashboard-accent focus:border-dashboard-accent focus:z-10 sm:text-sm bg-white dark:bg-gray-900"
-                placeholder="Email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 dark:text-white rounded-b-md focus:outline-none focus:ring-dashboard-accent focus:border-dashboard-accent focus:z-10 sm:text-sm bg-white dark:bg-gray-900"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-dashboard-accent hover:bg-dashboard-accent-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-dashboard-accent"
-            >
-              {loading ? 'Signing in...' : 'Sign in'}
-            </button>
-          </div>
-        </form>
-        <div className="mt-4 flex flex-col items-center space-y-2">
-          <button
-            type="button"
-            className="text-dashboard-accent hover:text-dashboard-accent-dark font-semibold underline"
-            onClick={() => setShowChangePassword(true)}
-          >
-            Change Password
-          </button>
-          <button
-            type="button"
-            className="text-xs text-dashboard-accent hover:text-dashboard-accent-dark underline"
-            onClick={() => setShowForgotPassword(true)}
-          >
-            Forgot Password?
-          </button>
-        </div>
-      </div>
-      {/* Post-login modal: ask to change password or continue */}
-      {showPostLoginModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/40">
-          <div className="bg-white dark:bg-dashboard-primary rounded-xl p-6 w-full max-w-sm shadow-xl border-4 border-dashboard-accent dark:border-dashboard-accent-dark ring-2 ring-dashboard-accent dark:ring-dashboard-accent-dark">
-            <h2 className="text-lg font-bold mb-4 text-dashboard-accent dark:text-dashboard-accent-dark text-center">Welcome!</h2>
-            <p className="mb-6 text-center text-dashboard-primary dark:text-dashboard-primary-bright">Would you like to change your password now?</p>
-            <div className="flex gap-2 mt-2 justify-center">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+      <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-6 text-dashboard-primary dark:text-white">Sign in to your account</h2>
+        {/* Login Form */}
+        {!showChangePassword ? (
+          <>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {error && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded dark:bg-red-900/20 dark:border-red-800 dark:text-red-400">
+                  {error}
+                </div>
+              )}
+              <div className="rounded-md shadow-sm -space-y-px">
+                <div>
+                  <label htmlFor="email" className="sr-only">
+                    Email address
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 dark:text-white rounded-t-md focus:outline-none focus:ring-dashboard-accent focus:border-dashboard-accent focus:z-10 sm:text-sm bg-white dark:bg-gray-900"
+                    placeholder="Email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="password" className="sr-only">
+                    Password
+                  </label>
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 dark:text-white rounded-b-md focus:outline-none focus:ring-dashboard-accent focus:border-dashboard-accent focus:z-10 sm:text-sm bg-white dark:bg-gray-900"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+              </div>
+              <button type="submit" className="w-full py-2 px-4 bg-orange-500 text-white rounded hover:bg-dashboard-primary-dark transition">Sign in</button>
+            </form>
+            <div className="mt-4 text-center">
               <button
-                type="button"
-                className="flex-1 py-2 rounded-md bg-dashboard-accent text-white font-semibold hover:bg-dashboard-accent-dark dark:bg-dashboard-accent-dark dark:text-dashboard-primary hover:bg-dashboard-accent-dark dark:hover:bg-dashboard-accent transition-colors duration-200"
+                className="text-dashboard-primary dark:text-white underline hover:text-dashboard-accent text-sm dark:hover:text-dashboard-accent"
                 onClick={() => {
                   setShowChangePassword(true);
-                  setShowPostLoginModal(false);
+                  setChangeError('');
+                  setChangeSuccess('');
                 }}
               >
                 Change Password
               </button>
+            </div>
+          </>
+        ) : (
+          <form onSubmit={handleChangePassword} className="space-y-6">
+            <input
+              type="email"
+              placeholder="Email address"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              className="w-full px-3 py-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-white"
+              required
+            />
+            <input
+              type="password"
+              placeholder="Old Password"
+              value={oldPassword}
+              onChange={e => setOldPassword(e.target.value)}
+              className="w-full px-3 py-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-white"
+              required
+            />
+            <input
+              type="password"
+              placeholder="New Password"
+              value={newPassword}
+              onChange={e => setNewPassword(e.target.value)}
+              className="w-full px-3 py-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-white"
+              required
+            />
+            <input
+              type="password"
+              placeholder="Confirm New Password"
+              value={confirmPassword}
+              onChange={e => setConfirmPassword(e.target.value)}
+              className="w-full px-3 py-2 border rounded bg-white text-gray-900 dark:bg-gray-900 dark:text-white"
+              required
+            />
+            {changeSuccess && <div className="text-green-600 text-sm text-center">{changeSuccess}</div>}
+            {changeError && <div className="text-red-500 text-sm text-center">{changeError}</div>}
+            <div className="flex items-center justify-between">
               <button
                 type="button"
-                className="flex-1 py-2 rounded-md bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700"
+                className="text-dashboard-primary  dark:text-white dark:hover:text-dashboard-accent underline hover:text-dashboard-accent text-sm"
                 onClick={() => {
-                  setShowPostLoginModal(false);
-                  navigate('/dashboard');
+                  setShowChangePassword(false);
+                  setChangeError('');
+                  setChangeSuccess('');
                 }}
               >
-                Continue to Dashboard
+                Back to Login
+              </button>
+              <button type="submit" className="py-2 px-6 bg-dashboard-accent text-white rounded hover:bg-dashboard-accent-dark transition" disabled={changing}>
+                {changing ? 'Saving...' : 'Save'}
               </button>
             </div>
-          </div>
-        </div>
-      )}
-      {/* Change Password Modal */}
-      {showChangePassword && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/40">
-          <div className="bg-white dark:bg-dashboard-primary rounded-xl p-6 w-full max-w-sm shadow-xl border-4 border-dashboard-accent dark:border-dashboard-accent-dark ring-2 ring-dashboard-accent dark:ring-dashboard-accent-dark">
-            <h2 className="text-xl font-bold mb-4 text-dashboard-accent dark:text-dashboard-accent-dark text-center">Change Password</h2>
-            <form onSubmit={handleChangePassword} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">New Password</label>
-                <input
-                  type="password"
-                  className="w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                  value={newPassword}
-                  onChange={e => setNewPassword(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Confirm New Password</label>
-                <input
-                  type="password"
-                  className="w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                  value={confirmPassword}
-                  onChange={e => setConfirmPassword(e.target.value)}
-                  required
-                />
-              </div>
-              {changeError && <div className="text-red-500 text-sm text-center">{changeError}</div>}
-              {changeSuccess && <div className="text-green-600 text-sm text-center">{changeSuccess}</div>}
-              <div className="flex gap-2 mt-2">
-                <button
-                  type="button"
-                  className="flex-1 py-2 rounded-md bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700"
-                  onClick={() => setShowChangePassword(false)}
-                  disabled={changing}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="flex-1 py-2 rounded-md bg-dashboard-accent text-white font-semibold hover:bg-dashboard-accent-dark dark:bg-dashboard-accent-dark dark:text-dashboard-primary hover:bg-dashboard-accent-dark dark:hover:bg-dashboard-accent transition-colors duration-200"
-                  disabled={changing}
-                >
-                  {changing ? 'Changing...' : 'Change Password'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-      {/* Forgot Password Modal */}
-      {showForgotPassword && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/40">
-          <div className="bg-white dark:bg-dashboard-primary rounded-xl p-6 w-full max-w-sm shadow-xl border-4 border-dashboard-accent dark:border-dashboard-accent-dark ring-2 ring-dashboard-accent dark:ring-dashboard-accent-dark">
-            <h2 className="text-xl font-bold mb-4 text-dashboard-accent dark:text-dashboard-accent-dark text-center">Forgot Password</h2>
-            <form onSubmit={handleForgotPassword} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">Email Address</label>
-                <input
-                  type="email"
-                  className="w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                  value={forgotEmail}
-                  onChange={e => setForgotEmail(e.target.value)}
-                  required
-                />
-              </div>
-              {forgotStatus && <div className="text-sm text-center mt-2 {forgotStatus.startsWith('Error') ? 'text-red-500' : 'text-green-600'}">{forgotStatus}</div>}
-              <div className="flex gap-2 mt-2">
-                <button
-                  type="button"
-                  className="flex-1 py-2 rounded-md bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700"
-                  onClick={() => setShowForgotPassword(false)}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="flex-1 py-2 rounded-md bg-dashboard-accent text-white font-semibold hover:bg-dashboard-accent-dark dark:bg-dashboard-accent-dark dark:text-dashboard-primary hover:bg-dashboard-accent-dark dark:hover:bg-dashboard-accent transition-colors duration-200"
-                >
-                  Send Reset Email
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+          </form>
+        )}
+      </div>
     </div>
   );
 };

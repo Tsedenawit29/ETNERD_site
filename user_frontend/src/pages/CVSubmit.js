@@ -66,8 +66,7 @@ const CVSubmit = () => {
       const { data: uploadData, error: uploadError } = await supabase.storage.from('etfiles').upload(`cvs/${Date.now()}_${form.file.name}`, form.file);
       if (uploadError) throw uploadError;
       // Get public URL
-      const { data: publicUrlData } = supabase.storage.from('etfiles').getPublicUrl(uploadData.path);
-      file_url = publicUrlData.publicUrl;
+      file_url = uploadData.path;
       const { error: insertError } = await supabase.from('et_career').insert([
         {
           full_name: form.full_name,

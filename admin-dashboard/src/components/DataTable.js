@@ -349,6 +349,87 @@ const DataTable = ({
           </div>
         );
 
+      case 'et_book':
+        return (
+          <div className="space-y-3">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-dashboard-primary-bright">
+              {item.name}
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Email:</span> <a href={`mailto:${item.email}`} className="text-dashboard-accent underline hover:text-dashboard-primary">{item.email}</a>
+            </p>
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Phone:</span> {item.phone}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Subject:</span> {item.subject}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Meassage:</span> {item.content}
+            </p>
+            {item.file_url && (
+              <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+                <span className="font-medium">File Url:</span> <a href={item.file_url} target="_blank" rel="noopener noreferrer" className="text-dashboard-accent underline hover:text-dashboard-primary break-all">{item.file_url}</a>
+              </p>
+            )}
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Seen:</span> {item.seen ? <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">Yes</span> : <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300">No</span>}
+            </p>
+          </div>
+        );
+
+      case 'et_contact_messages':
+        return (
+          <div className="space-y-3">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-dashboard-primary-bright">
+              {item.name}
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Email:</span> <a href={`mailto:${item.email}`} className="text-dashboard-accent underline hover:text-dashboard-primary">{item.email}</a>
+            </p>
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Subject:</span> {item.subject}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Meassage:</span> {item.message}
+            </p>
+            {item.file_url && (
+              <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+                <span className="font-medium">File Url:</span> <a href={item.file_url} target="_blank" rel="noopener noreferrer" className="text-dashboard-accent underline hover:text-dashboard-primary break-all">{item.file_url}</a>
+              </p>
+            )}
+          </div>
+        );
+
+      case 'et_career':
+        return (
+          <div className="space-y-3">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-dashboard-primary-bright">
+              {item.full_name}
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Email:</span> <a href={`mailto:${item.email}`} className="text-dashboard-accent underline hover:text-dashboard-primary">{item.email}</a>
+            </p>
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Phone:</span> {item.phone}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Subject:</span> {item.subject}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Message:</span> {item.meassage}
+            </p>
+            {item.file_url && (
+              <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+                <span className="font-medium">File Url:</span> <a href={`https://lyuqbekqidamzuvgtinu.supabase.co/storage/v1/object/public/etfiles/cvs/${item.file_url}`} target="_blank" rel="noopener noreferrer" className="text-dashboard-accent underline hover:text-dashboard-primary break-all">{item.file_url}</a>
+              </p>
+            )}
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Created At:</span> {item.created_at ? new Date(item.created_at).toLocaleString() : '-'}
+            </p>
+          </div>
+        );
+
       default:
         return (
           <div className="space-y-3">
@@ -548,6 +629,35 @@ const DataTable = ({
                 <p className="text-gray-700 dark:text-dashboard-primary-bright whitespace-pre-wrap">{item.content}</p>
               </div>
             </div>
+          </div>
+        );
+
+      case 'et_career':
+        return (
+          <div className="space-y-3">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-dashboard-primary-bright">
+              {item.full_name}
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Email:</span> <a href={`mailto:${item.email}`} className="text-dashboard-accent underline hover:text-dashboard-primary">{item.email}</a>
+            </p>
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Phone:</span> {item.phone}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Subject:</span> {item.subject}
+            </p>
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Message:</span> {item.meassage}
+            </p>
+            {item.file_url && (
+              <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+                <span className="font-medium">File Url:</span> <a href={`https://lyuqbekqidamzuvgtinu.supabase.co/storage/v1/object/public/etfiles/cvs/${item.file_url}`} target="_blank" rel="noopener noreferrer" className="text-dashboard-accent underline hover:text-dashboard-primary break-all">{item.file_url}</a>
+              </p>
+            )}
+            <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
+              <span className="font-medium">Created At:</span> {item.created_at ? new Date(item.created_at).toLocaleString() : '-'}
+            </p>
           </div>
         );
 
