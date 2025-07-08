@@ -176,7 +176,7 @@ const Career = () => {
             </div>
           </div>
           <div className="mt-8 text-center text-slate-500 dark:text-slate-400 mb-8">
-            Stay connected with us on <a href="https://www.linkedin.com/company/etnerd/" target="_blank" rel="noopener noreferrer" className="font-semibold underline">LinkedIn</a> for future job announcements.
+            Stay connected with us on <a href="https://www.linkedin.com/in/etnerd-secsolutions-86088b373/" target="_blank" rel="noopener noreferrer" className="font-semibold underline">LinkedIn</a> for future job announcements.
           </div>
         </div>
       </div>
@@ -246,7 +246,7 @@ const Career = () => {
             </div>
           </div>
           <div className="mt-8 text-center text-slate-500 dark:text-slate-400 mb-8">
-            Stay connected with us on <a href="https://www.linkedin.com/company/etnerd/" target="_blank" rel="noopener noreferrer" className="font-semibold underline">LinkedIn</a> for future job announcements.
+            Stay connected with us on <a href="https://www.linkedin.com/in/etnerd-secsolutions-86088b373/" target="_blank" rel="noopener noreferrer" className="font-semibold underline">LinkedIn</a> for future job announcements.
           </div>
         </div>
       </div>

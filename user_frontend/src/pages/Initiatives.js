@@ -370,13 +370,13 @@ export default function Initiatives() {
         </p>
         <div className="flex justify-center">
           <Link
-            to="/contact"
+            to="/services"
             className="px-6 py-3 rounded-full bg-dashboard-accent text-white font-semibold shadow-lg shadow-black/30 hover:bg-gray-100 transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl"
           >
             Explore our Services
           </Link>
           <Link
-            to="/services"
+            to="/contact"
             className="px-6 py-3 rounded-full border-2 mx-4 border-black dark:border-white text-black dark:text-white bg-transparent font-semibold shadow-lg shadow-black/30 hover:bg-white hover:text-dashboard-accent transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl"
           >
             Contact Us

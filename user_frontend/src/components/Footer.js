@@ -122,7 +122,7 @@ const Footer = () => (
         {/* Social Media Icons are now in this section */}
         <h3 className="font-semibold text-lg mb-4 text-white">Follow Us</h3>
         <div className="flex items-center gap-4">
-          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"
+          <a href="https://www.linkedin.com/in/etnerd-secsolutions-86088b373/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"
              className="text-white/80 hover:text-dashboard-accent text-3xl transition-colors duration-300 transform hover:-translate-y-1">
             <FaLinkedin />
           </a>

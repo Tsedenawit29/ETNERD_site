@@ -204,16 +204,22 @@ const About = () => {
         </p>
         <div className="flex justify-center">
           <Link
-              to="/contact"
+              to="/services"
               className="px-6 py-3 rounded-full bg-dashboard-accent text-white font-semibold shadow-lg shadow-black/30 hover:bg-dashboard-accent-dark transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl"
             >
              Explore our Services
             </Link>
             <Link
-              to="/services"
+              to="/faqs"
               className="px-6 py-3 rounded-full border-2 mx-4 border-black text-black bg-transparent font-semibold shadow-lg shadow-black/30 hover:bg-dashboard-accent hover:text-white transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl dark:border-white dark:text-white dark:bg-transparent"
             >
-              Contact Us
+              FAQs
+            </Link>
+              <Link
+              to="/contact"
+              className="px-6 py-3 rounded-full bg-dashboard-accent text-white font-semibold shadow-lg shadow-black/30 hover:bg-dashboard-accent-dark transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl"
+            >
+             Contact Us
             </Link>
         </div>
       </div>
