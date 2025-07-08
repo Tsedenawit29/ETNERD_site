@@ -17,6 +17,7 @@ import CVSubmit from './pages/CVSubmit';
 import FAQs from './pages/FAQs';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
+import './App.css';
 
 function App() {
   return (

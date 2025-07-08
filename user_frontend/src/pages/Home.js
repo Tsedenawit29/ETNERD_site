@@ -2,12 +2,13 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient'; // Ensure supabaseClient is correctly configured
 import ServiceIcon from '../components/ServiceIcon'; // Assuming ServiceIcon component exists
-import etnerdImage from '../asset/hero2.jpg'; // Your background hero image
+import etnerdImage from '../asset/hero5.jpg'; // Your background hero image
 import RasbyteLogo from '../asset/rasbytepartner.png';
 import compassLogo from '../asset/compass.png';
 import ipv6etLogo from '../asset/ipv6.png';
 import cdiLogo from '../asset/cdi.png';
 import SaiaLogo from '../asset/saia.jpg';
+import '../../src/App.css';
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -20,6 +21,8 @@ const Home = () => {
   const [newsCarouselIndex, setNewsCarouselIndex] = useState(0);
   const newsVisibleCards = 3;
   const newsCarouselInterval = useRef(null);
+  const iconsRowRef = useRef(null);
+  const whyChooseRef = useRef(null);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -75,12 +78,12 @@ const Home = () => {
   // Auto-slide carousel for news
   useEffect(() => {
     if (news.length > newsVisibleCards) {
-      newsCarouselInterval.current = setInterval(() => {
+      const interval = setInterval(() => {
         setNewsCarouselIndex((prev) => (prev + 1) % news.length);
-      }, 4000);
-      return () => clearInterval(newsCarouselInterval.current);
+      }, 4000); // Slide every 4 seconds
+      return () => clearInterval(interval);
     }
-  }, [news]);
+  }, [news, newsVisibleCards]);
 
   const nextNewsSlide = () => {
     setNewsCarouselIndex((prev) => (prev + 1) % news.length);
@@ -91,24 +94,53 @@ const Home = () => {
 
   // Helper to get visible news for carousel
   const getVisibleNews = () => {
-    if (news.length <= newsVisibleCards) return news;
+    if (news.length === 0) return [];
     const result = [];
-    for (let i = 0; i < newsVisibleCards; i++) {
-      result.push(news[(newsCarouselIndex + i) % news.length]);
+    // Center the current card
+    const half = Math.floor(newsVisibleCards / 2);
+    for (let i = -half; i <= half; i++) {
+      const idx = (newsCarouselIndex + i + news.length) % news.length;
+      result.push(news[idx]);
     }
     return result;
   };
+
+  // Animate icons row on mount
+  useEffect(() => {
+    if (iconsRowRef.current) {
+      const icons = iconsRowRef.current.querySelectorAll('.hero-icon-animate');
+      icons.forEach((icon, i) => {
+        icon.style.opacity = 0;
+        icon.style.transform = 'translateY(30px)';
+        setTimeout(() => {
+          icon.style.transition = 'opacity 0.7s cubic-bezier(0.77,0,0.18,1), transform 0.7s cubic-bezier(0.77,0,0.18,1)';
+          icon.style.opacity = 1;
+          icon.style.transform = 'translateY(0)';
+        }, 300 + i * 180);
+      });
+    }
+  }, []);
 
   return (
     <>
       {/* Hero Section */}
       <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-dashboard-primary-bg">
+        {/* Dropdown chevron icon on the bottom left */}
+        <button
+          className="absolute left-6 bottom-8 z-30 p-2 rounded-full bg-white/80 dark:bg-black/60 shadow-lg hover:bg-dashboard-accent transition-all duration-300 animate-bounce"
+          onClick={() => whyChooseRef.current && whyChooseRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+          aria-label="Scroll to icons"
+        >
+          <svg className="w-8 h-8 text-dashboard-accent" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
         {/* Full background image with continuous movement - always showing full Ethiopian map */}
         <img
           src={etnerdImage}
           alt="ETNERD Hero Background - Ethiopian Map"
-          className="absolute inset-0 w-full h-full object-cover z-0"
-          style={{ animation: 'hero-zoom 4.5s cubic-bezier(0.77,0,0.18,1) infinite', willChange: 'transform' }}
+          className="absolute inset-0 w-full h-full object-cover z-0 hero-pro"
+          style={{ objectPosition: 'center 22%' }}
         />
         {/* Dark shadow overlay that gradually lightens */}
         <div className="absolute inset-0 z-10 bg-gradient-to-br from-black/80 via-black/60 to-black/40 dark:from-black/90 dark:via-black/70 dark:to-black/50 animate-shadow-lift" />
@@ -128,13 +160,17 @@ const Home = () => {
           {/* Ethiopian flag colors accent */}
           <div className="absolute top-8 left-8 w-16 h-2 bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 rounded-full opacity-60 animate-pulse-slow" />
           <div className="absolute top-8 right-8 w-16 h-2 bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 rounded-full opacity-60 animate-pulse-slow" />
-          <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-white mb-4 tracking-tight drop-shadow-lg animate-fade-in hero-title-bold" style={{ marginTop: '5.5rem' }}>
+          <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-white mb-3 tracking-tight drop-shadow-lg animate-fade-in hero-title-bold"
+            style={{ marginTop: '10rem' }}
+          >
             Local Brains. <span className="text-dashboard-accent">Global Standards.</span>
           </h1>
-          <p className="max-w-4xl text-base md:text-lg lg:text-xl text-gray-200 mb-8 animate-slide-up drop-shadow leading-relaxed hero-desc-bold" style={{ marginTop: '2.5rem' }}>
+          <p className="max-w-4xl text-base md:text-lg lg:text-xl text-gray-200 mb-8 animate-slide-up drop-shadow leading-relaxed hero-desc-bold"
+            style={{ marginTop: '1rem' }}
+          >
             At <span className="text-dashboard-accent font-semibold">ETNERD Security Solutions</span>, we harness the power of Ethiopian innovation and global expertise to deliver world-class cybersecurity, IT infrastructure, and digital transformation solutions. Our mission is to empower businesses with secure, scalable, and innovative technologies that protect their assets, enhance performance, and drive sustainable growth across Africa and beyond.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 mt-4 animate-fade-in">
+          <div className="flex flex-col sm:flex-row gap-4 mt-0 animate-fade-in">
             {/* Contact Us Button - Orange background, white text */}
             <Link
               to="/contact"
@@ -150,16 +186,10 @@ const Home = () => {
               About Us
             </Link>
           </div>
-          {/* Vertical switch icon below buttons */}
-          <div className="mt-12 animate-bounce">
-            <div className="w-6 h-12 rounded-full bg-gradient-to-br from-dashboard-accent/80 to-dashboard-accent/60 border-2 border-white/30 flex flex-col items-center shadow-lg relative">
-              <div className="w-5 h-5 bg-white rounded-full shadow-md transform translate-y-0.5 animate-pulse"></div>
-            </div>
-          </div>
           {/* Security, Innovation, World icons row */}
-          <div className="mt-8 flex flex-row items-center justify-center gap-10">
+          <div ref={iconsRowRef} className="mt-20 flex flex-row items-center justify-center gap-10">
             {/* Security Icon */}
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center hero-icon-animate">
               <svg className="w-20 h-20 text-dashboard-primary mb-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M12 2l8 4v6c0 5.55-3.84 10.74-9 12C5.84 22.74 2 17.55 2 12V6l10-4z" fill="#133041" fillOpacity="0.7" />
                 <circle cx="12" cy="13" r="3" fill="#ff9800" />
@@ -167,7 +197,7 @@ const Home = () => {
               <span className="text-sm font-semibold text-dashboard-primary dark:text-dashboard-primary">Security</span>
             </div>
             {/* Innovation Icon (Lightbulb) */}
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center hero-icon-animate">
               <svg className="w-20 h-20 text-dashboard-accent mb-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" stroke="#ff9800" strokeWidth="2" fill="none" />
                 <circle cx="12" cy="12" r="3" fill="#ff9800" fillOpacity="0.3" />
@@ -175,7 +205,7 @@ const Home = () => {
               <span className="text-sm font-semibold text-dashboard-accent dark:text-dashboard-accent-dark">Innovation</span>
             </div>
             {/* World Icon */}
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center hero-icon-animate">
               <svg className="w-20 h-20 text-dashboard-primary mb-2" fill="none" stroke="#133041" strokeWidth="2" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10" fill="#133041" fillOpacity="0.15" />
                 <ellipse cx="12" cy="12" rx="8" ry="4" stroke="#ff9800" strokeWidth="2" fill="none" />
@@ -188,7 +218,7 @@ const Home = () => {
       </section>
 
       {/* Why Choose ETNERD Section */}
-      <section className="w-full bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black py-20 px-4 md:px-8">
+      <section ref={whyChooseRef} className="w-full bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black py-20 px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-dashboard-primary via-dashboard-accent to-dashboard-primary bg-clip-text text-transparent dark:from-dashboard-primary dark:via-dashboard-accent-dark dark:to-dashboard-primary">
@@ -320,40 +350,49 @@ const Home = () => {
               )}
               {/* Carousel Container */}
               <div className="overflow-hidden">
-                <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${newsCarouselIndex * (100 / newsVisibleCards)}%)` }}>
-                  {news.map((item, idx) => (
-                    <div
-                      key={item.id}
-                      className="w-full md:w-1/3 flex-shrink-0 px-2"
-                      style={{ maxWidth: '350px', minWidth: '260px' }}
-                    >
+                <div className="flex transition-transform duration-500 ease-in-out justify-center items-center">
+                  {getVisibleNews().map((item, i) => {
+                    const centerIdx = Math.floor(newsVisibleCards / 2);
+                    const isCenter = i === centerIdx;
+                    const isSecond = i === centerIdx - 1 || i === centerIdx + 1;
+                    return (
                       <div
-                        className="relative rounded-2xl shadow-lg overflow-hidden min-h-[220px] flex flex-col justify-end group border border-dashboard-accent/10 h-full bg-white dark:bg-dashboard-primary-bg"
+                        key={item.id}
+                        className={`flex-shrink-0 px-2 transition-all duration-500 
+                          ${isCenter ? 'scale-110 z-20 shadow-3xl bg-white dark:bg-dashboard-primary-bg' : ''}
+                          ${isSecond && !isCenter ? 'scale-105 z-10 shadow-xl opacity-90' : ''}
+                          ${!isCenter && !isSecond ? 'scale-95 opacity-60' : ''}
+                        `}
+                        style={{ maxWidth: '370px', minWidth: '270px' }}
                       >
-                        {/* Published date at top right, with more space */}
-                        <span className="absolute top-4 right-6 text-xs text-dashboard-accent font-semibold bg-white/80 dark:bg-dashboard-primary-bg/80 px-3 py-1 rounded-full z-10 shadow-md">
-                          {item.published_date ? new Date(item.published_date).toLocaleDateString() : ''}
-                        </span>
-                        <div className="relative z-10 p-4 flex flex-col h-full justify-end">
-                          <h3 className="text-lg font-bold text-dashboard-primary dark:text-white font-display mb-1 line-clamp-2 mt-8">
-                            {item.headline}
-                          </h3>
-                          <p className="text-dashboard-primary/80 dark:text-gray-200 text-sm mb-3 line-clamp-3">
-                            {item.content.split(' ').slice(0, 20).join(' ')}{item.content.split(' ').length > 20 ? '...' : ''}
-                          </p>
-                          <Link
-                            to="/news"
-                            className="inline-flex items-center text-dashboard-accent font-semibold hover:text-orange-600 transition-colors duration-200 text-sm mt-auto"
-                          >
-                            Read more
-                            <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                          </Link>
+                        <div
+                          className="relative rounded-2xl shadow-lg overflow-hidden min-h-[220px] flex flex-col justify-end group border border-dashboard-accent/10 h-full bg-white dark:bg-dashboard-primary-bg"
+                        >
+                          {/* Published date at top right, with more space */}
+                          <span className="absolute top-4 right-6 text-xs text-dashboard-accent font-semibold bg-white/80 dark:bg-dashboard-primary-bg/80 px-3 py-1 rounded-full z-10 shadow-md">
+                            {item.published_date ? new Date(item.published_date).toLocaleDateString() : ''}
+                          </span>
+                          <div className="relative z-10 p-4 flex flex-col h-full justify-end">
+                            <h3 className="text-lg font-bold text-dashboard-primary dark:text-white font-display mb-1 line-clamp-2 mt-8">
+                              {item.headline}
+                            </h3>
+                            <p className="text-dashboard-primary/80 dark:text-gray-200 text-sm mb-3 line-clamp-3">
+                              {item.content.split(' ').slice(0, 20).join(' ')}{item.content.split(' ').length > 20 ? '...' : ''}
+                            </p>
+                            <Link
+                              to="/news"
+                              className="inline-flex items-center text-dashboard-accent font-semibold hover:text-orange-600 transition-colors duration-200 text-sm mt-auto"
+                            >
+                              Read more
+                              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                              </svg>
+                            </Link>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
               {/* Navigation Arrows */}

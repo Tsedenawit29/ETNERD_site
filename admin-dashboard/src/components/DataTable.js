@@ -421,7 +421,7 @@ const DataTable = ({
             </p>
             {item.file_url && (
               <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
-                <span className="font-medium">File Url:</span> <a href={`https://lyuqbekqidamzuvgtinu.supabase.co/storage/v1/object/public/etfiles/cvs/${item.file_url}`} target="_blank" rel="noopener noreferrer" className="text-dashboard-accent underline hover:text-dashboard-primary break-all">{item.file_url}</a>
+                <span className="font-medium">File Url:</span> <a href={`https://lyuqbekqidamzuvgtinu.supabase.co/storage/v1/object/public/etfiles/cvs/${item.file_url.replace(/^(cvs[\\/]+)+/i, '')}`} target="_blank" rel="noopener noreferrer" className="text-dashboard-accent underline hover:text-dashboard-primary break-all">{item.file_url.replace(/^(cvs[\\/]+)+/i, '')}</a>
               </p>
             )}
             <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
@@ -702,7 +702,7 @@ const DataTable = ({
             </p>
             {item.file_url && (
               <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">
-                <span className="font-medium">File Url:</span> <a href={`https://lyuqbekqidamzuvgtinu.supabase.co/storage/v1/object/public/etfiles/cvs/${item.file_url}`} target="_blank" rel="noopener noreferrer" className="text-dashboard-accent underline hover:text-dashboard-primary break-all">{item.file_url}</a>
+                <span className="font-medium">File Url:</span> <a href={`https://lyuqbekqidamzuvgtinu.supabase.co/storage/v1/object/public/etfiles/cvs/${item.file_url.replace(/^(cvs[\\/]+)+/i, '')}`} target="_blank" rel="noopener noreferrer" className="text-dashboard-accent underline hover:text-dashboard-primary break-all">{item.file_url.replace(/^(cvs[\\/]+)+/i, '')}</a>
               </p>
             )}
             <p className="text-sm text-gray-600 dark:text-dashboard-primary-bright">

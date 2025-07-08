@@ -63,6 +63,132 @@
   75% { transform: scale(1.08) translateZ(20px); z-index: 10; }
 }
 
+@keyframes hero-roll {
+  0%, 100% { transform: translateX(0) scale(1) rotate(0deg); }
+  20% { transform: translateX(-2%) scale(1.08) rotate(-1deg); }
+  50% { transform: translateX(2%) scale(1.12) rotate(1.5deg); }
+  80% { transform: translateX(-2%) scale(1.08) rotate(-1deg); }
+}
+
+@keyframes hero-roll-zoom-depth {
+  0%, 100% {
+    transform: translateX(0) scale(1) rotate(0deg);
+    z-index: 0;
+  }
+  15% {
+    transform: translateX(-2%) scale(1.08) rotate(-1deg);
+    z-index: 0;
+  }
+  30% {
+    transform: translateX(2%) scale(1.12) rotate(1.5deg);
+    z-index: 0;
+  }
+  45% {
+    transform: translateX(0) scale(0.92) rotate(0deg);
+    z-index: 0;
+  }
+  60% {
+    transform: translateX(0) scale(1.18) rotate(0deg);
+    z-index: 10;
+  }
+  80% {
+    transform: translateX(-2%) scale(1.08) rotate(-1deg);
+    z-index: 0;
+  }
+}
+
+@keyframes hero-cinematic {
+  0% {
+    opacity: 0;
+    filter: brightness(0.3) grayscale(0.7) blur(2px);
+    transform: scale(1) translateY(10px);
+    box-shadow: 0 0 0 0 #ff980000;
+  }
+  10% {
+    opacity: 0.2;
+    filter: brightness(0.4) grayscale(0.6) blur(1.5px);
+    box-shadow: 0 0 0 0 #ff980000;
+  }
+  25% {
+    opacity: 0.6;
+    filter: brightness(0.7) grayscale(0.3) blur(1px);
+    box-shadow: 0 0 40px 10px #ff980055;
+  }
+  40% {
+    opacity: 1;
+    filter: brightness(1) grayscale(0) blur(0.5px);
+    transform: scale(1.04) translateY(0);
+    box-shadow: 0 0 80px 30px #ff9800aa;
+  }
+  60% {
+    opacity: 1;
+    filter: brightness(1.1) grayscale(0) blur(0);
+    transform: scale(1.12) translateY(-5px);
+    box-shadow: 0 0 120px 40px #ff9800cc, 0 0 40px 10px #ff980088;
+  }
+  80% {
+    opacity: 1;
+    filter: brightness(1) grayscale(0) blur(0.2px);
+    transform: scale(1.08) translateY(0);
+    box-shadow: 0 0 60px 20px #ff980088;
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1) grayscale(0) blur(0);
+    transform: scale(1.06) translateY(0);
+    box-shadow: 0 0 40px 10px #ff980055;
+  }
+}
+
+@keyframes hero-pro {
+  0% {
+    opacity: 0;
+    filter: brightness(0.3) grayscale(0.7) blur(2.5px);
+    transform: scale(1) translateX(0) translateY(0) rotate(-0.5deg);
+    box-shadow: 0 0 0 0 #ff980000, 0 0 0 0 #fff0;
+  }
+  10% {
+    opacity: 0.4;
+    filter: brightness(0.5) grayscale(0.5) blur(1.7px);
+    box-shadow: 0 0 0 0 #ff980000, 0 0 0 0 #fff0;
+  }
+  20% {
+    opacity: 0.8;
+    filter: brightness(0.85) grayscale(0.2) blur(1px);
+    box-shadow: 0 0 40px 12px #ff980055, 0 0 10px 2px #fff2;
+  }
+  35% {
+    opacity: 1;
+    filter: brightness(1) grayscale(0) blur(0.5px);
+    transform: scale(1.04) translateX(-1vw) translateY(0.7vw) rotate(-1deg);
+    box-shadow: 0 0 80px 24px #ff980088, 0 0 30px 8px #fff3;
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.13) grayscale(0) blur(0.2px);
+    transform: scale(1.11) translateX(1.2vw) translateY(-1vw) rotate(1.2deg);
+    box-shadow: 0 0 160px 50px #ff9800cc, 0 0 60px 18px #fff5;
+  }
+  65% {
+    opacity: 1;
+    filter: brightness(1.08) grayscale(0) blur(0.7px);
+    transform: scale(1.06) translateX(0.7vw) translateY(0.7vw) rotate(-0.7deg);
+    box-shadow: 0 0 100px 28px #ff9800bb, 0 0 40px 10px #fff2;
+  }
+  80% {
+    opacity: 1;
+    filter: brightness(1) grayscale(0) blur(0.3px);
+    transform: scale(1.03) translateX(-1vw) translateY(0) rotate(0.5deg);
+    box-shadow: 0 0 60px 18px #ff980088, 0 0 10px 2px #fff2;
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1) grayscale(0) blur(0);
+    transform: scale(1.01) translateX(0) translateY(0) rotate(-0.5deg);
+    box-shadow: 0 0 30px 8px #ff980044, 0 0 0 0 #fff0;
+  }
+}
+
 .hero-zoom {
   animation: hero-zoom 4.5s cubic-bezier(0.77,0,0.18,1) infinite;
 }
@@ -77,6 +203,22 @@
 
 .hero-frontback {
   animation: hero-frontback 7s ease-in-out infinite;
+}
+
+.hero-roll-zoom {
+  animation: hero-roll 12s cubic-bezier(0.77,0,0.18,1) infinite;
+}
+
+.hero-roll-zoom-depth {
+  animation: hero-roll-zoom-depth 12s cubic-bezier(0.77,0,0.18,1) infinite;
+}
+
+.hero-cinematic {
+  animation: hero-cinematic 5.5s cubic-bezier(0.77,0,0.18,1) 0s both;
+}
+
+.hero-pro {
+  animation: hero-pro 22s cubic-bezier(0.77,0,0.18,1) infinite;
 }
 
 .hero-title-bold {
