@@ -101,7 +101,7 @@ const NavBar = ({ ThemeToggleButton }) => {
               to="/contact"
               className="px-3 xl:px-6 py-2 xl:py-2.5 text-white bg-dashboard-accent dark:text-dashboard-accent-dark dark:bg-white rounded-full shadow-lg hover:shadow-xl hover:bg-dashboard-accent-dark dark:hover:bg-dashboard-accent transform hover:scale-105 transition-all duration-300 font-semibold text-sm xl:text-base whitespace-nowrap"
             >
-              <span className="hidden xl:inline">Contact</span>
+              <span className="hidden xl:inline">Contact Us</span>
               <span className="xl:hidden">Contact</span>
             </Link>
           </li>

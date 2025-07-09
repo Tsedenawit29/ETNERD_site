@@ -140,7 +140,7 @@ const Home = () => {
           src={etnerdImage}
           alt="ETNERD Hero Background - Ethiopian Map"
           className="absolute inset-0 w-full h-full object-cover z-0 hero-pro"
-          style={{ objectPosition: 'center 22%' }}
+          style={{ objectPosition: 'center 35%' }}
         />
         {/* Dark shadow overlay that gradually lightens */}
         <div className="absolute inset-0 z-10 bg-gradient-to-br from-black/80 via-black/60 to-black/40 dark:from-black/90 dark:via-black/70 dark:to-black/50 animate-shadow-lift" />
@@ -171,19 +171,19 @@ const Home = () => {
             At <span className="text-dashboard-accent font-semibold">ETNERD Security Solutions</span>, we harness the power of Ethiopian innovation and global expertise to deliver world-class cybersecurity, IT infrastructure, and digital transformation solutions. Our mission is to empower businesses with secure, scalable, and innovative technologies that protect their assets, enhance performance, and drive sustainable growth across Africa and beyond.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mt-0 animate-fade-in">
-            {/* Contact Us Button - Orange background, white text */}
-            <Link
-              to="/contact"
-              className="px-6 py-3 rounded-full bg-dashboard-accent text-white font-semibold shadow-lg shadow-black/30 hover:bg-dashboard-accent-dark transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl"
-            >
-              Contact Us
-            </Link>
-            {/* About Us Button - White background, dark text */}
+                {/* About Us Button - White background, dark text */}
             <Link
               to="/about"
               className="px-6 py-3 rounded-full border-2 border-white text-white bg-transparent font-semibold shadow-lg shadow-black/30 hover:bg-dashboard-accent hover:text-white transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl"
             >
               About Us
+            </Link>
+            {/* Contact Us Button - Orange background, white text */}
+            <Link
+              to="/initiatives"
+              className="px-6 py-3 rounded-full bg-dashboard-accent text-white font-semibold shadow-lg shadow-black/30 hover:bg-dashboard-accent-dark transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl"
+            >
+              Our Initiatives
             </Link>
           </div>
           {/* Security, Innovation, World icons row */}

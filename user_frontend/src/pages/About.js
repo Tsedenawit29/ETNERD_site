@@ -209,15 +209,9 @@ const About = () => {
             >
              Explore our Services
             </Link>
-            <Link
-              to="/faqs"
-              className="px-6 py-3 rounded-full border-2 mx-4 border-black text-black bg-transparent font-semibold shadow-lg shadow-black/30 hover:bg-dashboard-accent hover:text-white transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl dark:border-white dark:text-white dark:bg-transparent"
-            >
-              FAQs
-            </Link>
               <Link
               to="/contact"
-              className="px-6 py-3 rounded-full bg-dashboard-accent text-white font-semibold shadow-lg shadow-black/30 hover:bg-dashboard-accent-dark transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl"
+              className="px-6 py-3 rounded-full border-2 mx-4 border-black text-black bg-transparent font-semibold shadow-lg shadow-black/30 hover:bg-dashboard-accent hover:text-white transition-all duration-300 text-base text-center transform hover:-translate-y-1 hover:shadow-xl dark:border-white dark:text-white dark:bg-transparent"
             >
              Contact Us
             </Link>

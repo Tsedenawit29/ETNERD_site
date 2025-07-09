@@ -18,11 +18,13 @@ import FAQs from './pages/FAQs';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import './App.css';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <ThemeProvider>
       <Router>
+        <ScrollToTop />
         <NavBar />
         <div className="flex flex-col min-h-screen">
           <main className="flex-grow">
