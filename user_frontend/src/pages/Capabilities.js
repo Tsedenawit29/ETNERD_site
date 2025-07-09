@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Re-using your partner data
 const partners = [
   { name: 'US Department of State (DoS)', img: 'https://www.rasbyte.com/assets/State%20Dept-DXvv341D.gif' },
   { name: 'US Department of Homeland Security (DHS)', img: 'https://www.rasbyte.com/assets/DHS-CHJFAPAT.gif' },
