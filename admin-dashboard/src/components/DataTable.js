@@ -42,15 +42,21 @@ const DataTable = ({
   }, [tableName]);
 
   useEffect(() => {
-    // When details modal opens for et_book, mark as seen
+    // When details modal opens for et_book, et_career, or et_contact_messages, mark as seen
+    const tableSeenMap = {
+      et_book: 'et_book',
+      et_career: 'et_career',
+      et_contact_messages: 'et_contact_messages',
+    };
+    const currentTable = tableSeenMap[tableName];
     if (
       detailsModal.isOpen &&
-      tableName === 'et_book' &&
+      currentTable &&
       detailsModal.item &&
       detailsModal.item.seen === false
     ) {
-      const markBookingSeen = async () => {
-        await supabase.from('et_book').update({ seen: true }).eq('id', detailsModal.item.id);
+      const markSeen = async () => {
+        await supabase.from(currentTable).update({ seen: true }).eq('id', detailsModal.item.id);
         // Optionally update local data
         setData((prev) =>
           prev.map((row) =>
@@ -59,7 +65,7 @@ const DataTable = ({
         );
         if (onItemSeen) onItemSeen(detailsModal.item.id);
       };
-      markBookingSeen();
+      markSeen();
     }
   }, [detailsModal, tableName]);
 

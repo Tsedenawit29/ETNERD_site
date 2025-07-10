@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaLinkedin, FaFacebookSquare, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
+import { FaLinkedin, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
 import hero from '../asset/hero.jpg'; // This image now functions as your primary logo visual
 
 const navItems = [
@@ -125,10 +125,6 @@ const Footer = () => (
           <a href="https://www.linkedin.com/in/etnerd-secsolutions-86088b373/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"
              className="text-white/80 hover:text-dashboard-accent text-3xl transition-colors duration-300 transform hover:-translate-y-1">
             <FaLinkedin />
-          </a>
-          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook Page"
-             className="text-white/80 hover:text-dashboard-accent text-3xl transition-colors duration-300 transform hover:-translate-y-1">
-            <FaFacebookSquare />
           </a>
         </div>
       </div>
