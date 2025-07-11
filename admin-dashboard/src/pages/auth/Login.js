@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Modal from '../../components/Modal';
-import supabase from '../../config/supabase';
+import { supabase } from '../../lib/supabaseClient';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -25,7 +25,7 @@ const Login = () => {
       setError('');
       setLoading(true);
       await signIn(email, password);
-      navigate('/dashboard');
+      navigate('/admin/dashboard');
     } catch (error) {
       setError('Failed to sign in. Please check your credentials.');
       console.error('Login error:', error);

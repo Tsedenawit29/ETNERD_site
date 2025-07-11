@@ -2,6 +2,7 @@
   "name": "user_frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://etnerd.com",
   "dependencies": {
     "@supabase/supabase-js": "^2.50.3",
     "@tabler/icons-react": "^3.34.0",

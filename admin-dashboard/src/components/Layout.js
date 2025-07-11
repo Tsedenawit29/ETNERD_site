@@ -111,28 +111,28 @@ const Layout = ({ children }) => {
     const markAsSeen = async (table) => {
       await supabase.from(table).update({ seen: true }).eq('seen', false);
     };
-    if (location.pathname === '/contact-messages') {
+    if (location.pathname === '/admin/contact-messages') {
       markAsSeen('et_contact_messages');
       setUnseen((prev) => ({ ...prev, contact: 0 }));
     }
-    if (location.pathname === '/booked-services') {
+    if (location.pathname === '/admin/booked-services') {
       markAsSeen('et_book');
       setUnseen((prev) => ({ ...prev, booked: 0 }));
     }
-    if (location.pathname === '/career-view') {
+    if (location.pathname === '/admin/career-view') {
       markAsSeen('et_career');
       setUnseen((prev) => ({ ...prev, career: 0 }));
     }
   }, [location.pathname]);
 
   const menuItems = [
-    { path: '/dashboard', label: 'Dashboard', icon: HomeIcon },
-    { path: '/services', label: 'Services', icon: ResourcesIcon },
-    { path: '/news', label: 'News', icon: NewsIcon },
-    { path: '/jobs', label: 'Jobs', icon: BriefcaseIcon },
-    { path: '/career-view', label: 'Career Submissions', icon: FileIcon, notification: unseen.career },
-    { path: '/contact-messages', label: 'Contact Messages', icon: MessagesIcon, notification: unseen.contact },
-    { path: '/booked-services', label: 'Booked Services', icon: MessagesIcon, notification: unseen.booked },
+    { path: '/admin/dashboard', label: 'Dashboard', icon: HomeIcon },
+    { path: '/admin/services', label: 'Services', icon: ResourcesIcon },
+    { path: '/admin/news', label: 'News', icon: NewsIcon },
+    { path: '/admin/jobs', label: 'Jobs', icon: BriefcaseIcon },
+    { path: '/admin/career-view', label: 'Career Submissions', icon: FileIcon, notification: unseen.career },
+    { path: '/admin/contact-messages', label: 'Contact Messages', icon: MessagesIcon, notification: unseen.contact },
+    { path: '/admin/booked-services', label: 'Booked Services', icon: MessagesIcon, notification: unseen.booked },
   ];
 
   const handleSignOut = async () => {

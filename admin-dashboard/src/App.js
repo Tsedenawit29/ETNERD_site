@@ -19,16 +19,16 @@ function App() {
       <AuthProvider>
         <ThemeProvider>
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
-              <Route index element={<Navigate to="/dashboard" replace />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="services" element={<Services />} />
-              <Route path="news" element={<News />} />
-              <Route path="contact-messages" element={<ContactMessages />} />
-              <Route path="booked-services" element={<BookedServices />} />
-              <Route path="jobs" element={<Jobs />} />
-              <Route path="career-view" element={<CareerView />} />
+            <Route path="login" element={<Login />} />
+            <Route path="/admin" element={<PrivateRoute><Layout /></PrivateRoute>}>
+              <Route index element={<Navigate to="/admin/dashboard" replace />} />
+              <Route path="/admin/dashboard" element={<Dashboard />} />
+              <Route path="/admin/services" element={<Services />} />
+              <Route path="/admin/news" element={<News />} />
+              <Route path="/admin/contact-messages" element={<ContactMessages />} />
+              <Route path="/admin/booked-services" element={<BookedServices />} />
+              <Route path="/admin/jobs" element={<Jobs />} />
+              <Route path="/admin/career-view" element={<CareerView />} />
             </Route>
           </Routes>
         </ThemeProvider>

@@ -9,7 +9,7 @@ const Dashboard = () => {
     et_services: 0,
     et_news: 0,
     et_contactMessages: 0,
-    et_bookedServices: 0,
+    et_booked: 0,
     et_jobs: 0,
     et_career: 0,
   });
@@ -63,14 +63,14 @@ const Dashboard = () => {
           { count: et_services, error: servicesError },
           { count: et_news, error: newsError },
           { count: et_contactMessages, error: contactError },
-          { count: et_bookedServices, error: bookedServicesError },
+          { count: et_booked, error: bookedServicesError },
           { count: et_jobs, error: jobsError },
           { count: et_career, error: careerError },
         ] = await Promise.all([
           supabase.from('et_services').select('*', { count: 'exact', head: true }),
           supabase.from('et_news').select('*', { count: 'exact', head: true }),
           supabase.from('et_contact_messages').select('*', { count: 'exact', head: true }),
-          supabase.from('et_booked_services').select('*', { count: 'exact', head: true }),
+          supabase.from('et_book').select('*', { count: 'exact', head: true }),
           supabase.from('et_jobs').select('*', { count: 'exact', head: true }),
           supabase.from('et_career').select('*', { count: 'exact', head: true }),
         ]);
@@ -87,7 +87,7 @@ const Dashboard = () => {
           et_services: et_services || 0,
           et_news: et_news || 0,
           et_contactMessages: et_contactMessages || 0,
-          et_bookedServices: et_bookedServices || 0,
+          et_booked: et_booked || 0,
           et_jobs: et_jobs || 0,
           et_career: et_career || 0,
         };
@@ -101,7 +101,7 @@ const Dashboard = () => {
           et_services: 0,
           et_news: 0,
           et_contactMessages: 0,
-          et_bookedServices: 0,
+          et_booked: 0,
           et_jobs: 0,
           et_career: 0,
         });
@@ -181,7 +181,7 @@ const Dashboard = () => {
         />
         <StatCard
           title="Booked Services"
-          value={stats.et_bookedServices}
+          value={stats.et_booked}
           color="bg-gradient-to-br from-dashboard-primary/80 to-blue-900/80 shadow-xl"
         />
         <StatCard

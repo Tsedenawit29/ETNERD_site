@@ -2,6 +2,7 @@
   "name": "admin-dashboard",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://etnerd.com/admin",
   "dependencies": {
     "@supabase/supabase-js": "^2.50.0",
     "@tabler/icons-react": "^3.34.0",
