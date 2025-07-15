@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaLinkedin, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
+import { FaLinkedin, FaEnvelope, FaPhoneAlt, FaHandPointRight } from 'react-icons/fa';
 import hero from '../asset/hero.jpg'; // This image now functions as your primary logo visual
 
 const navItems = [
@@ -121,12 +121,37 @@ const Footer = () => (
 
         {/* Social Media Icons are now in this section */}
         <h3 className="font-semibold text-lg mb-4 text-white">Follow Us</h3>
-        <div className="flex items-center gap-4">
-          <a href="https://www.linkedin.com/in/etnerd-secsolutions-86088b373/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"
-             className="text-white/80 hover:text-dashboard-accent text-3xl transition-colors duration-300 transform hover:-translate-y-1">
-            <FaLinkedin />
-          </a>
+        <div className="flex flex-col items-center gap-2">
+          <div className="flex items-center gap-2 -ml-48">
+            <FaHandPointRight className="text-dashboard-accent text-lg animate-pulse hover:animate-bounce transition-all duration-300 hover:translate-x-3" 
+              style={{
+                animation: 'clickAnimation 2s ease-in-out infinite'
+              }}
+            />
+            <a 
+              href="https://www.linkedin.com/in/etnerd-security-solutions-86088b373/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="LinkedIn Profile"
+              className="text-white/80 hover:text-dashboard-accent text-2xl transition-colors duration-300 hover:scale-110"
+              style={{
+                animation: 'iconGlow 2s ease-in-out infinite'
+              }}
+            >
+              <FaLinkedin />
+            </a>
+          </div>
         </div>
+        <style jsx>{`
+          @keyframes clickAnimation {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(16px); }
+          }
+          @keyframes iconGlow {
+            0%, 100% { color: rgba(255, 255, 255, 0.8); }
+            50% { color: var(--dashboard-accent); }
+          }
+        `}</style>
       </div>
     </div>
 
