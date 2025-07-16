@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaChevronDown, FaNetworkWired, FaShieldAlt, FaTools, FaQuestionCircle, FaGlobe } from 'react-icons/fa';
 
@@ -242,7 +243,12 @@ function FAQs() {
                   Email: <a href="mailto:contact@etnerd.com" className="text-dashboard-accent hover:underline">contact@etnerd.com</a>
                 </p>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Visit our <a href="/contact" className="text-dashboard-accent hover:underline">Contact page</a> for more ways to reach us.
+                  Visit our  <Link
+              to="/contact"
+              className="text-dashboard-accent hover:underline"
+            >
+            Contact page
+            </Link> for more ways to reach us.
                 </p>
               </div>
             </motion.div>

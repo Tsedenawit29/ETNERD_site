@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 import { supabase } from '../supabaseClient';
+import { Link } from 'react-router-dom';
 
 const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
@@ -184,12 +185,12 @@ const Contact = () => {
           <p className="text-2xl text-dashboard-primary dark:text-white mb-10 max-w-2xl mx-auto font-sans">
             Our team of experts is eager to discuss your specific cybersecurity challenges and provide tailored solutions. Don't hesitate to reach out!
           </p>
-          <a
-            href="/services"
-            className="inline-block py-4 px-12 bg-dashboard-accent text-white font-semibold rounded-full shadow-lg hover:bg-orange-600 dark:bg-dashboard-accent-dark dark:hover:bg-dashboard-accent transition-colors duration-300 text-xl font-display hover:scale-105"
+         <Link  to='/services' className="inline-block py-4 px-12 bg-dashboard-accent text-white font-semibold rounded-full shadow-lg hover:bg-orange-600 dark:bg-dashboard-accent-dark dark:hover:bg-dashboard-accent transition-colors duration-300 text-xl font-display hover:scale-105"
           >
             Explore Our Services
-          </a>
+         </Link>
+            
+          
         </div>
       </div>
     </section>
