@@ -129,9 +129,9 @@ const Footer = () => (
               }}
             />
             <a 
-              href="https://www.linkedin.com/in/etnerd-security-solutions-86088b373/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+              href="https://www.linkedin.com/in/etnerd-security-solutions-86088b373/"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
               className="text-white/80 hover:text-dashboard-accent text-2xl transition-colors duration-300 hover:scale-110"
               style={{

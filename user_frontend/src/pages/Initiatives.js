@@ -5,6 +5,7 @@ import ipv6Img from '../asset/ipv6.png';
 import wicImg from '../asset/wic.png';
 import globalstandardsImg from '../asset/globalstandards.jpg';
 import capacityimg from '../asset/capacity.jpg';
+import scrmImg from '../asset/scrm.jpg';
 
 // Web-sourced images/logos (public domain or official initiative pages)
 const initiatives = [
@@ -91,6 +92,17 @@ const initiatives = [
       </>
     ),
   },
+  {
+    title: 'Supply Chain Risk Management (SCRM)',
+    img: scrmImg, // Placeholder image, replace with SCRM-specific if available
+    imgAlt: 'Supply Chain Risk Management',
+    attribution: 'Source: placeholder',
+    description: (
+      <>
+        Supply Chain Risk Management (SCRM) is a strategic approach to identifying, assessing, and mitigating potential risks and vulnerabilities during IT asset acquisition process. This initiative aims in creating awareness to both public and private enterprises and aims to minimize system disruptions and avoid hardware tampering and related supply chain driven cyber risks.
+      </>
+    ),
+  },
 ];
 
 const impactAreas = [
@@ -173,6 +185,13 @@ function InitiativeIcon({ type }) {
         <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-sai-teal-500 text-white shadow-lg mr-3">
           {/* Graduation Cap Icon */}
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m0 0c-4.418 0-8-1.79-8-4" /></svg>
+        </span>
+      );
+    case 'Supply Chain Risk Management (SCRM)':
+      return (
+        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-sai-teal-700 text-white shadow-lg mr-3">
+          {/* Supply Chain/Link Icon */}
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 010 5.656l-1.414 1.414a4 4 0 01-5.656-5.656l2.121-2.121a2 2 0 112.828 2.828l-2.121 2.121" /></svg>
         </span>
       );
     default:
